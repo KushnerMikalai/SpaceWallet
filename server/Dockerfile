@@ -16,13 +16,10 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 COPY . .
 
-
-# Prefer not to run as root.
 USER deno
 
 # Compile the main app so that it doesn't need to be compiled each startup/entry.
-RUN deno cache deps.ts
-RUN deno cache app.ts
+# RUN deno cache deps.ts
+# RUN deno cache app.ts
 
-# CMD ["run", "--allow-net", "main.ts"]
 CMD ["run", "--unstable", "--watch", "--allow-read", "--allow-net", "app.ts"]

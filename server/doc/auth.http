@@ -1,0 +1,42 @@
+# /
+GET http://localhost:8000
+
+<> 2021-06-23T213438.200.txt
+###
+
+# REGISTER
+POST http://localhost:8000/register HTTP/1.1
+content-type: application/json
+
+{
+  "name":"nikolai kushner",
+  "email":"nikolaikushner@gmail.com",
+  "password":"111111Qq"
+}
+
+<> 2021-06-23T213346.400.json
+###
+
+# LOGIN
+POST http://localhost:8000/login
+Content-Type: application/json
+
+{
+  "email":"nikolaikushner@gmail.com",
+  "password":"111111Qq"
+}
+
+<> 2021-06-23T213341.200.json
+<> 2021-06-23T211401.200.json
+<> 2021-06-23T211053.400.json
+###
+
+# TOKEN
+POST http://localhost:8000/token
+Content-Type: application/json
+
+{
+  "refresh_token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJkZW5vX2FwaSIsInR5cGUiOiJhY2Nlc3MiLCJpZCI6NSwibmFtZSI6Im5pa29sYWkga3VzaG5lciIsImVtYWlsIjoibmlrb2xhaWt1c2huZXJAZ21haWwuY29tIiwicm9sZXMiOiJVc2VyIiwiZXhwIjoxNjI0NDc2NjIyfQ.T1sN_mFTsWelBLiyMuH_drKCaOd9drfAuV5dUAYJ7z8"
+}
+
+<> 2021-06-23T214124.400.json
