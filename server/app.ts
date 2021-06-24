@@ -7,14 +7,11 @@ const port = 8000
 const app = new Application<Context>()
 
 app.use(oakCors());
-// @ts-ignore
 app.use(middlewares.loggerMiddleware)
-// @ts-ignore
 app.use(middlewares.errorMiddleware)
-// @ts-ignore
 app.use(middlewares.timingMiddleware)
-// app.use(middlewares.JWTAuthMiddleware)
-// app.use(middlewares.requestIdMiddleware)
+app.use(middlewares.JWTAuthMiddleware)
+app.use(middlewares.requestIdMiddleware)
 
 app.use(router.routes())
 app.use(router.allowedMethods())

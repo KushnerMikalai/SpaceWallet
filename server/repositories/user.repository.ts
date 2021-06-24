@@ -1,5 +1,5 @@
-import { db } from "./../db/db.ts";
-import { UserInfo } from "../types.ts";
+import { db } from './../db/db.ts'
+import { UserInfo } from '../types.ts'
 
 const getUsers = async () => {
     return await db.query(`

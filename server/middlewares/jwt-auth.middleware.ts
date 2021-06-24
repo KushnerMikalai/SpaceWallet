@@ -9,10 +9,11 @@ const JWTAuthMiddleware = async (ctx: Context, next: () => Promise<unknown>) => 
             const user = await getJwtPayload(token);
 
             if (user) {
-                ctx.user = user as AuthUser;
+                ctx.state.user = user as AuthUser;
             }
         }
     } catch (err) {
+        console.log(err, 'jwt-auth-middleware') // TODO: handle Error
     }
     await next();
 };

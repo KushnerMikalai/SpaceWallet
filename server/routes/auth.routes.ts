@@ -33,7 +33,6 @@ const refreshToken = async (ctx: Context) => {
     const request = ctx.request;
     const data = await request.body().value as unknown as RefreshToken;
 
-    console.log('0', data);
     ctx.response.body = await authService.refreshToken(data.refresh_token);
 };
 
