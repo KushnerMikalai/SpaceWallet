@@ -1,0 +1,24 @@
+# USERS
+GET {{url}}:{{port}}/users HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+
+
+# USER ONE (id)
+GET {{url}}:{{port}}/users/5 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+###
+
+
+# USER EDIT
+PUT {{url}}:{{port}}/users/5 HTTP/1.1
+content-type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "name": "admin",
+    "email": "admin@admin.io"
+}
+###

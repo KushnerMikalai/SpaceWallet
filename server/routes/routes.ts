@@ -1,13 +1,20 @@
-import { Router } from "../deps.ts"
-import { Context } from "./../types.ts"
-import * as authRoutes from "./auth.routes.ts"
-import { requestValidator } from "./../middlewares/request-validator.middleware.ts"
+import { Router, validasaur } from '../deps.ts'
+import { Context, UserRole } from './../types.ts'
+import { requestValidator, userGuard } from '../middlewares/middlewares.ts'
 
-const router: Router = new Router();
+import * as authRoutes from './auth.routes.ts'
+import * as userRoutes from './user.routes.ts'
 
-router.get("", (ctx: Context) => {
-    ctx.response.body = "<hello world>";
-});
+const userSchema = {
+    name: [validasaur.required, validasaur.minLength(3)],
+    email: [validasaur.required, validasaur.isEmail],
+}
+
+const router: Router = new Router()
+
+router.get('', (ctx: Context) => {
+    ctx.response.body = '<hello world>'
+})
 
 router
     .post("/login",
@@ -23,5 +30,24 @@ router
         authRoutes.refreshToken
     );
 
+router
+    .get('/users',
+        userGuard(UserRole.ADMIN),
+        userRoutes.getUsers
+    )
+    .get('/users/:id',
+        userGuard(UserRole.ADMIN),
+        userRoutes.getUserById
+    )
+    .put('/users/:id',
+        userGuard(),
+        requestValidator({ bodyRules: userSchema }),
+        userRoutes.updateUser
+    )
+    .delete('/users/:id',
+        userGuard(UserRole.ADMIN),
+        userRoutes.deleteUser
+    );
 
-export { router };
+
+export { router }

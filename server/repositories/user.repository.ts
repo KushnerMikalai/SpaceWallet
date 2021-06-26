@@ -60,8 +60,7 @@ const updateUser = async (
     user: { name: string; email: string },
 ) => {
     const { name, email } = user;
-    const result = await db.query(
-        `
+    const result = await db.query(`
         UPDATE users SET
             name = ?,
             email = ?,

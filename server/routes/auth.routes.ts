@@ -14,7 +14,6 @@ const register = async (ctx: Context) => {
     ctx.response.body = await authService.registerUser(userData);
 };
 
-
 const loginSchema = {
     email: [validasaur.required, validasaur.isEmail],
     password: [validasaur.required, validasaur.lengthBetween(6, 12)],

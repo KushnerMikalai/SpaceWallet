@@ -1,6 +1,6 @@
 export type AuthUser = {
-    id: number;
-    email: string;
-    name: string;
-    roles: string;
-};
+    id: number
+    email: string
+    name: string
+    roles: string
+}
