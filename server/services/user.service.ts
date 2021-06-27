@@ -36,7 +36,7 @@ export const updateUser = async (id: number, userData: any) => {
 
 export const deleteUser = async (id: number) => {
     // TODO: catch db error
-    const result = await userRepo.deleteUser(id);
+    const result = await userRepo.deleteUser(id)
     if (!result['affectedRows']) {
         throw new httpErrors.NotFound('User not found')
     }

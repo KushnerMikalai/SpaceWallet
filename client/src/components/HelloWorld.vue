@@ -5,13 +5,18 @@
         :value="'Up + 1'"
         @click="increment"
     />
+    {{test?.name}}
 </template>
 
 <script lang="ts">
-import { computed, defineComponent } from 'vue'
+import { reactive, onMounted, computed, defineComponent } from 'vue'
 import { useStore } from 'vuex'
 import { key } from '../store'
 import UiButton from './ui/UiButton.vue'
+
+interface TestType {
+    name?: string
+}
 
 export default defineComponent({
     name: 'HelloWorld',
@@ -21,10 +26,16 @@ export default defineComponent({
     props: {
         msg: {type: String, required: true}
     },
-    setup: () => {
+    setup: (props, context) => {
         const store = useStore(key)
+        const test: TestType = reactive({})
+
+        onMounted(() => {
+            test.name = 'asdas'
+        })
 
         return {
+            test,
             count: computed(() => store.state.count),
             increment: () => store.commit('increment'),
         };

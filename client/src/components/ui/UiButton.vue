@@ -18,6 +18,9 @@ export default defineComponent({
 
 <style scoped>
 .button {
+    padding: 4px 16px;
     display: inline-block;
+    background-color: var(--theme);
+    border: none;
 }
 </style>
