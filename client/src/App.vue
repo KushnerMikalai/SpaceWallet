@@ -1,11 +1,11 @@
 <template>
     <Layout>
-        <HelloWorld msg="TypeScript" />
+        <router-view/>
     </Layout>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
+import {defineComponent} from 'vue'
 import Layout from './components/Layout.vue'
 import HelloWorld from './components/HelloWorld.vue'
 
@@ -67,7 +67,6 @@ a {
 abbr[title] {
     border-bottom: none;
     text-decoration: underline;
-    text-decoration: underline dotted;
 }
 
 b,
@@ -189,11 +188,11 @@ textarea {
 }
 
 [type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
+    -webkit-appearance: none;
 }
 
 ::-webkit-file-upload-button {
-  -webkit-appearance: button;
+    -webkit-appearance: button;
     font: inherit;
 }
 
