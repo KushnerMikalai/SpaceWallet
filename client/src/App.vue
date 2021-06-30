@@ -8,13 +8,29 @@
 import {defineComponent} from 'vue'
 import Layout from './components/Layout.vue'
 import HelloWorld from './components/HelloWorld.vue'
+import AuthApiProtected from './api/services/auth';
 
 export default defineComponent({
     name: 'App',
     components: {
         HelloWorld,
         Layout
-    }
+    },
+    methods: {
+        async auth() {
+            try {
+                const res = await new AuthApiProtected().login({
+                    email: 'admin@admin.io',
+                    password: '111111',
+                });
+
+                Object.keys(res).map(key => {
+                    this.$cookie.setCookie(key, res[key], {secure: true});
+                });
+            } catch (e) {
+            }
+        },
+    },
 })
 </script>
 

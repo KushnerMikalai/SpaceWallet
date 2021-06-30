@@ -43,6 +43,8 @@ export const loginUser = async (credential: LoginCredential) => {
                     'access_token': await jwt.getAuthToken(user),
                     'refresh_token': await jwt.getRefreshToken(user),
                 };
+            } else {
+                throw new httpErrors.Unauthorized('Invalid password');
             }
         } else {
             throw new httpErrors.Unauthorized('Inactive user status');
