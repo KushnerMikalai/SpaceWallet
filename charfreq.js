@@ -61,7 +61,7 @@ class Histogram {
 
         // Convert the counts to percentages
         for(let entry of entries) {
-            entry[1] = entry[1] / this.totalLetters*100;
+            entry[1] = entry[1] / this.totalLetters * 100;
         }
 
         // Drop any entries less than 1%

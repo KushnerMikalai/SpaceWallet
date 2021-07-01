@@ -5,10 +5,10 @@
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import Layout from './components/Layout.vue'
 import HelloWorld from './components/HelloWorld.vue'
-import AuthApiProtected from './api/services/auth';
+import AuthApiProtected from './api/services/auth'
 
 export default defineComponent({
     name: 'App',

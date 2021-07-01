@@ -1,5 +1,5 @@
 import Index from '../pages/index.vue'
-import About from '../pages/about.vue'
+const About = () => import('../pages/about.vue')
 
 const routes = [
     {
