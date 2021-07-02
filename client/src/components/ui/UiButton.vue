@@ -3,10 +3,9 @@
         class="button"
         :disabled="disabled"
     >
-        <span v-if="$slots.default">
+        <span class="button__value">
             <slot></slot>
         </span>
-        <span v-else>{{ value }}</span>
     </button>
 </template>
 
@@ -37,6 +36,10 @@ export default defineComponent({
     min-width: 80px;
     user-select: none;
     -webkit-font-smoothing: antialiased;
+}
+
+.button:focus {
+    outline: 1px solid #8a92a0;
 }
 
 .button:hover {
