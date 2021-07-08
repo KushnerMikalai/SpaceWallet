@@ -1,7 +1,6 @@
-import { AbstractMigration, Info, ClientMySQL } from "https://deno.land/x/nessie@2.0.0-rc5/mod.ts";
+import { AbstractMigration, Info, ClientMySQL } from 'https://deno.land/x/nessie@2.0.0-rc5/mod.ts'
 
 export default class extends AbstractMigration<ClientMySQL> {
-    /** Runs on migrate */
     async up(info: Info): Promise<void> {
         await this.client.query(`
             CREATE TABLE users (
@@ -15,8 +14,7 @@ export default class extends AbstractMigration<ClientMySQL> {
         `);
     }
 
-    /** Runs on rollback */
     async down(info: Info): Promise<void> {
-        await this.client.query("DROP TABLE users");
+        await this.client.query('DROP TABLE users')
     }
 }
