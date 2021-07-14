@@ -2,22 +2,22 @@ import { db } from './../db/db.ts'
 import { UserInfo } from '../types.ts'
 
 const getUsers = async () => {
-    return await db.query(`
-        SELECT
-            id, name, email, roles,
-            is_active, created_at, updated_at
-        FROM users
-    `);
-};
+    return await db.query(
+        `
+            SELECT id, name, email, roles, is_active, created_at
+            FROM users;
+        `
+    )
+}
 
 const getUserById = async (id: number) => {
     const users = await db.query(
         `
-        SELECT
-            id, name, email, roles,
-            is_active, created_at, updated_at
-        FROM users where id = ? limit 0, 1`,
-        [id],
+            SELECT id, name, email, roles, is_active, created_at, updated_at
+            FROM users
+            WHERE id = ? limit 0, 1;
+        `,
+        [id]
     );
     return users.length ? users[0] : null;
 };
@@ -25,11 +25,11 @@ const getUserById = async (id: number) => {
 const getUserByEmail = async (email: string) => {
     const users = await db.query(
         `
-        SELECT
-            id, name, email, password, roles,
-            is_active, created_at, updated_at
-        FROM users where email = ? limit 0, 1`,
-        [email],
+            SELECT id, name, email, password, roles, is_active, created_at, updated_at
+            FROM users
+            WHERE email = ? limit 0, 1;
+        `,
+        [email]
     );
     return users.length ? users[0] : null;
 };
@@ -40,14 +40,8 @@ const createUser = async (user: UserInfo) => {
 
     const { lastInsertId } = await db.query(
         `
-        INSERT into users (
-            id, name, email, roles, password,
-            is_active, created_at, updated_at
-        )
-        VALUES (
-            DEFAULT, ? , ? , ?, ?,
-            1, DEFAULT, DEFAULT
-        );
+            INSERT into users (id, name, email, roles, password, is_active, created_at, updated_at)
+            VALUES (DEFAULT, ? , ? , ?, ?, 1, DEFAULT, DEFAULT);
         `,
         [name, email, roles, password],
     );
@@ -55,17 +49,13 @@ const createUser = async (user: UserInfo) => {
     return await getUserById(lastInsertId);
 };
 
-const updateUser = async (
-    id: number,
-    user: { name: string; email: string },
-) => {
+const updateUser = async (id: number, user: { name: string; email: string }) => {
     const { name, email } = user;
-    const result = await db.query(`
-        UPDATE users SET
-            name = ?,
-            email = ?,
-            updated_at = DEFAULT
-        WHERE id = ?;
+    const result = await db.query(
+        `
+            UPDATE users
+            SET name = ?, email = ?, updated_at = DEFAULT
+            WHERE id = ?;
         `,
         [name, email, id],
     );
@@ -73,11 +63,11 @@ const updateUser = async (
     return result;
 };
 
-const deleteUser = async (id: number,) => {
+const deleteUser = async (id: number) => {
     const result = await db.query(
         `
-        DELETE FROM users
-        WHERE id = ?;
+            DELETE FROM users
+            WHERE id = ?;
         `,
         [id],
     );
@@ -90,5 +80,5 @@ export {
     getUserByEmail,
     createUser,
     updateUser,
-    deleteUser,
-};
+    deleteUser
+}
