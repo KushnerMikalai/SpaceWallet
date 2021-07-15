@@ -27,8 +27,11 @@
 ## DOCKER
 For Docker: Up docker-compose, this will create a docker container with the database with the given name in env.
 ```bash
-docker-compose up --build
+$ docker-compose up --build
+or
+$ docker-compose up -d
 ```
+
 
 ### RUN ONLU DB DOCKER
 Go to server folder and run:

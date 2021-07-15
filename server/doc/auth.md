@@ -5,7 +5,9 @@ $ curl -X GET http://localhost:8000
 
 ## REGISTER
 ```bash
-$ curl -d '{"name":"test", "email":"test@test.io", "password":"111111"}' -H "Content-Type: application/json" -X POST http://localhost:8000/register
+$ curl -d '{"name":"test", "email":"test@test.io", "password":"111111"}' \
+-H "Content-Type: application/json" \
+-X POST http://localhost:8000/register
 ```
 
 ## LOGIN

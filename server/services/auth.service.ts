@@ -7,25 +7,26 @@ import {
     UserRole,
     UserInfo,
     LoginCredential,
-} from "../types.ts";
+} from '../types.ts'
 
 export const registerUser = async (userData: CreateUser) => {
     try {
-        const {password} = userData;
-        userData.password = await encription.encript(password);
+        const { password } = userData
+        userData.password = await encription.encript(password)
 
         const user: UserInfo = {
             roles: [UserRole.USER],
             ...userData
-        };
-
-        return await userRepo.createUser(user);
-    } catch (err) {
-        const {message} = err;
-        if (message.match("email_unique")) {
-            throw new httpErrors.BadRequest(`Already user exists with email ${userData.email}`);
         }
-        throw err;
+
+        return await userRepo.createUser(user)
+    } catch (err) {
+        const { message } = err
+        if (message.match('email_unique')) {
+            throw new httpErrors.BadRequest(`Already user exists with email ${userData.email}`)
+        }
+
+        throw err
     }
 };
 

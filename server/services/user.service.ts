@@ -8,7 +8,7 @@ export const getUserById = async (id: number) => {
     }
 
     return user
-};
+}
 
 export const getUsers = async () => {
     const users = await userRepo.getUsers()

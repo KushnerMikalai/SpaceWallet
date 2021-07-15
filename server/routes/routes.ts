@@ -1,5 +1,5 @@
-import { Router, validasaur } from '../deps.ts'
-import { Context, UserRole } from './../types.ts'
+import { Context, Router, validasaur } from '../deps.ts'
+import { UserRole } from './../types.ts'
 import { requestValidator, userGuard } from '../middlewares/middlewares.ts'
 
 import * as authRoutes from './auth.routes.ts'
