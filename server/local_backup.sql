@@ -16,29 +16,32 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `nessie_migrations`
+-- Table structure for table `category`
 --
 
-DROP TABLE IF EXISTS `nessie_migrations`;
+DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `nessie_migrations` (
-  `id` bigint unsigned NOT NULL AUTO_INCREMENT,
-  `file_name` varchar(100) NOT NULL,
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `file_name` (`file_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+CREATE TABLE `category` (
+  `category_id` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `user_id` int NOT NULL,
+  `name` varchar(100) NOT NULL,
+  `image` varchar(150) DEFAULT NULL,
+  `created_at` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`category_id`),
+  KEY `fk_user_id` (`user_id`),
+  CONSTRAINT `fk_user_id` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `nessie_migrations`
+-- Dumping data for table `category`
 --
 
-LOCK TABLES `nessie_migrations` WRITE;
-/*!40000 ALTER TABLE `nessie_migrations` DISABLE KEYS */;
-INSERT INTO `nessie_migrations` VALUES (1,'20210621220958_create_users.ts','2021-07-03 19:14:37'),(2,'20210621234654_update_user_roles.ts','2021-07-03 19:14:37'),(3,'20210622200452_update_user_email.ts','2021-07-03 19:14:37'),(4,'20210622200502_update_user_password.ts','2021-07-03 19:14:38');
-/*!40000 ALTER TABLE `nessie_migrations` ENABLE KEYS */;
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -59,7 +62,7 @@ CREATE TABLE `users` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -81,4 +84,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2021-07-14 18:20:59
+-- Dump completed on 2021-07-16 21:42:46

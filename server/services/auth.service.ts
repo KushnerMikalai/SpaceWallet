@@ -1,4 +1,5 @@
 import * as userRepo from "./../repositories/user.repository.ts";
+import * as categoryRepo from '../repositories/category.repository.ts';
 import { httpErrors } from "../deps.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
@@ -14,7 +15,16 @@ export const registerUser = async (userData: CreateUser) => {
       ...userData,
     };
 
-    return await userRepo.createUser(user);
+    const newUser = await userRepo.createUser(user);
+
+    // TODO CREATE ALL DEFAULT CATEGORY
+    await categoryRepo.createCategory({
+        name: 'car',
+        image: '',
+        user_id: newUser.id,
+    });
+
+    return newUser;
   } catch (err) {
     const { message } = err;
     if (message.match("email_unique")) {

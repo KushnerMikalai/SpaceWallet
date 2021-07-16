@@ -55,5 +55,5 @@ $ cat local_backup.sql | docker exec -i server_db_1 /usr/bin/mysql -u root --pas
 
 > Backup DB:
 ```bash
-$ server % docker exec server_db_1 /usr/bin/mysqldump -u root --password=example deno_api_db > local_backup.sql
+$ docker exec server_db_1 /usr/bin/mysqldump -u root --password=example deno_api_db > local_backup.sql
 ```
