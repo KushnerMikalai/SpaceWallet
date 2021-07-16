@@ -21,6 +21,7 @@
  - Adminer
  - Docker
 
+> Before PUSH you need run $ deno fmt
 > _To work go to the folder **server**_
 
 

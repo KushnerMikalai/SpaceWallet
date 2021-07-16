@@ -1,20 +1,20 @@
-import { UserRole, AuthUser } from '../types.ts'
+import { AuthUser, UserRole } from "../types.ts";
 
 const hasUserRole = (user: AuthUser, roles: UserRole | UserRole[]) => {
-    const userRoles = user.roles.split(",").map((role) => role.trim());
+  const userRoles = user.roles.split(",").map((role) => role.trim());
 
-    if (typeof (roles) == "string") {
-        roles = [roles];
+  if (typeof (roles) == "string") {
+    roles = [roles];
+  }
+
+  let isRoleMatched = false;
+  roles.forEach((role) => {
+    if (userRoles.includes(role)) {
+      isRoleMatched = true;
     }
+  });
 
-    let isRoleMatched = false;
-    roles.forEach((role) => {
-        if (userRoles.includes(role)) {
-            isRoleMatched = true;
-        }
-    });
-
-    return isRoleMatched;
+  return isRoleMatched;
 };
 
 export { hasUserRole };

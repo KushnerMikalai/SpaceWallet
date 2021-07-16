@@ -1,29 +1,33 @@
-import { validasaur, httpErrors } from '../deps.ts'
-import { Context } from '../types.ts'
+import { httpErrors, validasaur } from "../deps.ts";
+import { Context } from "../types.ts";
 
-const getErrorMessage = (errors: validasaur.ValidationErrors): string | undefined => {
-    for (let attr in errors) {
-        const attrErrors = errors[attr]
+const getErrorMessage = (
+  errors: validasaur.ValidationErrors,
+): string | undefined => {
+  for (let attr in errors) {
+    const attrErrors = errors[attr];
 
-        for (let rule in attrErrors) {
-            return attrErrors[rule] as string
-        }
+    for (let rule in attrErrors) {
+      return attrErrors[rule] as string;
     }
-}
+  }
+};
 
-const requestValidator = ({bodyRules}: { bodyRules: validasaur.ValidationRules }): any => {
-    return async (ctx: Context, next: () => Promise<void>) => {
-        const request = ctx.request
-        const body: any = await request.body().value
+const requestValidator = (
+  { bodyRules }: { bodyRules: validasaur.ValidationRules },
+): any => {
+  return async (ctx: Context, next: () => Promise<void>) => {
+    const request = ctx.request;
+    const body: any = await request.body().value;
 
-        const [isValid, errors] = await validasaur.validate(body, bodyRules)
-        if (!isValid) {
-            const message = getErrorMessage(errors)
-            throw new httpErrors.BadRequest(message)
-        }
-
-        await next()
+    const [isValid, errors] = await validasaur.validate(body, bodyRules);
+    if (!isValid) {
+      const message = getErrorMessage(errors);
+      throw new httpErrors.BadRequest(message);
     }
-}
 
-export { requestValidator }
+    await next();
+  };
+};
+
+export { requestValidator };
