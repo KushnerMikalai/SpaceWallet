@@ -1,5 +1,5 @@
 import * as userRepo from "./../repositories/user.repository.ts";
-import * as categoryRepo from '../repositories/category.repository.ts';
+import * as categoryRepo from "../repositories/category.repository.ts";
 import { httpErrors } from "../deps.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
@@ -19,9 +19,9 @@ export const registerUser = async (userData: CreateUser) => {
 
     // TODO CREATE ALL DEFAULT CATEGORY
     await categoryRepo.createCategory({
-        name: 'car',
-        image: '',
-        user_id: newUser.id,
+      name: "car",
+      image: "",
+      user_id: newUser.id,
     });
 
     return newUser;
