@@ -16,7 +16,6 @@ const register = async (ctx: Context) => {
   const request = ctx.request;
   const userData = await request.body().value as unknown as CreateUser;
 
-  // TODO create default category for user
   ctx.response.body = await authService.registerUser(userData);
 };
 

@@ -17,11 +17,18 @@ export const registerUser = async (userData: CreateUser) => {
 
     const newUser = await userRepo.createUser(user);
 
-    // TODO CREATE ALL DEFAULT CATEGORY
-    await categoryRepo.createCategory({
-      name: "car",
-      image: "",
-      user_id: newUser.id,
+    const defaultCategoryList = [
+      "car",
+      "foodstuff",
+      "health",
+      "rest",
+      "gas",
+      "training",
+      "home",
+    ];
+
+    defaultCategoryList.forEach((key) => {
+      categoryRepo.createCategory({ name: key, image: "", userId: newUser.id });
     });
 
     return newUser;

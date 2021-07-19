@@ -1,5 +1,4 @@
-import { httpErrors, validasaur } from "../deps.ts";
-import { Context } from "../types.ts";
+import { Context, httpErrors, validasaur } from "../deps.ts";
 
 const getErrorMessage = (
   errors: validasaur.ValidationErrors,

@@ -1,27 +1,27 @@
 import { db } from "./../db/db.ts";
 import { CreateCategory } from "../types.ts";
 
-const getCategoryById = async (category_id: string) => {
+const getCategoryById = async (categoryId: string) => {
   const categories = await db.query(
     `
-              SELECT category_id, name, image, user_id
+              SELECT categoryId, name, image, userId
               FROM category
-              WHERE category_id = ? limit 0, 1;
+              WHERE categoryId = ? limit 0, 1;
           `,
-    [category_id],
+    [categoryId],
   );
   return categories.length ? categories[0] : null;
 };
 
 const createCategory = async (category: CreateCategory) => {
-  const { name, image, user_id } = category;
+  const { name, image, userId } = category;
 
   const { lastInsertId } = await db.query(
     `
-              INSERT into category (category_id, name, image, user_id, created_at, updated_at)
+              INSERT into category (categoryId, name, image, userId, createdAt, updatedAt)
               VALUES (DEFAULT, ? , ? , ? , DEFAULT, DEFAULT);
           `,
-    [name, image, user_id],
+    [name, image, userId],
   );
 
   return await getCategoryById(lastInsertId);

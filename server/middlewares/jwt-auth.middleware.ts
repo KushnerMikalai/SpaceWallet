@@ -1,4 +1,5 @@
-import { AuthUser, Context } from "./../types.ts";
+import { Context } from "../deps.ts";
+import { AuthUser } from "./../types.ts";
 import { getJwtPayload } from "../helpers/jwt.ts";
 
 const JWTAuthMiddleware = async (
