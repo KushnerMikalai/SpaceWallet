@@ -41,7 +41,7 @@ const createUser = async (user: UserInfo) => {
   const { lastInsertId } = await db.query(
     `
             INSERT into users (id, name, email, roles, password, is_active, created_at, updated_at)
-            VALUES (DEFAULT, ? , ? , ?, ?, 1, DEFAULT, DEFAULT);
+            VALUES (DEFAULT, ? , ? , ?, ?, 0, DEFAULT, DEFAULT);
         `,
     [name, email, roles, password],
   );

@@ -1,5 +1,4 @@
-import { Context } from "./../types.ts";
-import { uuid } from "../deps.ts";
+import { Context, uuid } from "../deps.ts";
 
 const requestIdMiddleware = async (
   ctx: Context,

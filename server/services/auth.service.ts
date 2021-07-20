@@ -4,6 +4,7 @@ import { httpErrors } from "../deps.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
 import { CreateUser, LoginCredential, UserInfo, UserRole } from "../types.ts";
+import { mailerObj } from "../helpers/smpt.ts";
 
 export const registerUser = async (userData: CreateUser) => {
   try {
@@ -16,6 +17,11 @@ export const registerUser = async (userData: CreateUser) => {
     };
 
     const newUser = await userRepo.createUser(user);
+
+    await mailerObj({
+      to: newUser.email,
+      body: `<h1>Hello from Deno!</h1>`, // TODO: generate validate token sent to email new user
+    });
 
     const defaultCategoryList = [
       "car",
@@ -88,7 +94,7 @@ export const refreshToken = async (token: string) => {
     } else {
       throw new httpErrors.Unauthorized("Invalid refresh token");
     }
-  } catch (err) {
+  } catch (_err) {
     throw new httpErrors.Unauthorized("Invalid token object");
   }
 };

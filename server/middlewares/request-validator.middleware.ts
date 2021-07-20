@@ -3,10 +3,10 @@ import { Context, httpErrors, validasaur } from "../deps.ts";
 const getErrorMessage = (
   errors: validasaur.ValidationErrors,
 ): string | undefined => {
-  for (let attr in errors) {
+  for (const attr in errors) {
     const attrErrors = errors[attr];
 
-    for (let rule in attrErrors) {
+    for (const rule in attrErrors) {
       return attrErrors[rule] as string;
     }
   }

@@ -1,5 +1,5 @@
-import { httpErrors } from "../deps.ts";
-import { Context, UserRole } from "../types.ts";
+import { Context, httpErrors } from "../deps.ts";
+import { UserRole } from "../types.ts";
 import { hasUserRole } from "../helpers/roles.ts";
 
 const userGuard = (roles?: UserRole | UserRole[]): any => {

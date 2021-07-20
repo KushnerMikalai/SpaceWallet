@@ -1,0 +1,10 @@
+{
+  "deno.suggest.imports.hosts": {
+      "https://deno.land": false
+  },
+  "deno.unstable": false,
+  "deno.lint": false,
+  "deno.codeLens.referencesAllFunctions": true,
+  "deno.path": "server/",
+  "deno.enable": true
+}

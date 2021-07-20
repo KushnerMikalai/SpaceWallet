@@ -1,6 +1,5 @@
-import { isHttpError, Status } from "../deps.ts";
+import { Context, isHttpError, Status } from "../deps.ts";
 import { config } from "./../config/config.ts";
-import { Context } from "./../types.ts";
 
 const errorMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {
   try {
