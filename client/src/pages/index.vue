@@ -1,7 +1,7 @@
 <template>
     <h1>Testing API</h1>
-    <UiButton @click="login">Login</UiButton>
-    <UiButton @click="userGetOne">userGetOne</UiButton>
+    <UiButton class="button" @click="login">Login</UiButton>
+    <UiButton class="button" @click="userGetOne">userGetOne</UiButton>
 </template>
 
 <script lang="ts">
@@ -16,22 +16,33 @@ export default defineComponent({
     },
     methods: {
       async login() {
-        const res = await api.auth.login({
-          email: 'admin@admin.io',
-          password: '111111',
-        })
+        try {
+          const res = await api.auth.login({
+            email: 'admin@admin.io',
+            password: '111111'
+          })
 
-        if (res && res.access_token && res.access_token && res.refresh_token) {
-          localStorage.setItem('accessToken', res.access_token)
-          localStorage.setItem('refreshToken', res.refresh_token)
+          if (res && res?.access_token && res?.refresh_token) {
+            localStorage.setItem('accessToken', res.access_token)
+            localStorage.setItem('refreshToken', res.refresh_token)
+          }
+        } catch(e) {
+          console.log('Error Login')
         }
       },
       async userGetOne() {
+        try {
           await api.user.getOne({id: 1})
+        } catch(e) {
+          console.log('Error Get User')
+        }
       },
     },
 })
 </script>
 
 <style scoped>
+.button:not(:last-child) {
+  margin-right: 10px;
+}
 </style>

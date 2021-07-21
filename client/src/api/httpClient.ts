@@ -27,7 +27,9 @@ abstract class HttpClient {
   }
 
   private handleRequest = (config: AxiosRequestConfig) => {
-    config.headers['Authorization'] = `Bearer ${this.accessToken}`
+    if (this.accessToken) {
+      config.headers['Authorization'] = `Bearer ${this.accessToken}`
+    }
     return config
   }
 
