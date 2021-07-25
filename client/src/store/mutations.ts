@@ -1,6 +1,6 @@
 import { State } from './state'
 
-export default {
+export const mutations = {
     increment (state: State) {
         state.count++
     },

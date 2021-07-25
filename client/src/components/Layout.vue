@@ -15,6 +15,6 @@
 import {defineComponent} from 'vue'
 
 export default defineComponent({
-    name: 'Layout',
+  name: 'Layout',
 })
 </script>

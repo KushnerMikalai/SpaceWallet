@@ -2,10 +2,11 @@
     <h1>Testing API</h1>
     <UiButton class="button" @click="login">Login</UiButton>
     <UiButton class="button" @click="userGetOne">userGetOne</UiButton>
+    <AuthForm/>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import {defineComponent, defineAsyncComponent} from 'vue'
 import UiButton from '../components/ui/UiButton.vue'
 import api from '../api/api'
 
@@ -13,6 +14,7 @@ export default defineComponent({
     name: 'index',
     components: {
         UiButton,
+        AuthForm: defineAsyncComponent(() => import('../components/AuthForm.vue'))
     },
     methods: {
       async login() {
