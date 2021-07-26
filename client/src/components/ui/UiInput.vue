@@ -64,7 +64,7 @@ export default defineComponent({
 
     const handleInput = event => {
       let { value } = event.target
-      if (value === nativeInputValue.value ) return
+      if (value === nativeInputValue.value) return
 
       ctx.emit(UPDATE_MODEL_EVENT, value)
       ctx.emit('input', value)
@@ -82,11 +82,11 @@ export default defineComponent({
       ctx.emit('change', event.target.value)
     }
 
-    const handleKeydown = e => {
-      ctx.emit('keydown', e)
+    const handleKeydown = event => {
+      ctx.emit('keydown', event)
     }
 
-     return {
+    return {
       input,
       textarea,
       handleInput,

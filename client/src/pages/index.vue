@@ -1,6 +1,5 @@
 <template>
     <h1>Testing API</h1>
-    <UiButton class="button" @click="login">Login</UiButton>
     <UiButton class="button" @click="userGetOne">userGetOne</UiButton>
     <AuthForm/>
 </template>
@@ -17,21 +16,6 @@ export default defineComponent({
         AuthForm: defineAsyncComponent(() => import('../components/AuthForm.vue'))
     },
     methods: {
-      async login() {
-        try {
-          const res = await api.auth.login({
-            email: 'admin@admin.io',
-            password: '111111'
-          })
-
-          if (res && res?.access_token && res?.refresh_token) {
-            localStorage.setItem('accessToken', res.access_token)
-            localStorage.setItem('refreshToken', res.refresh_token)
-          }
-        } catch(e) {
-          console.log('Error Login')
-        }
-      },
       async userGetOne() {
         try {
           await api.user.getOne({id: 1})
