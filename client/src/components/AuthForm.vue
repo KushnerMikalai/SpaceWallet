@@ -6,18 +6,20 @@
     <UiInput
       class="auth-form__item"
       :label="'Email'"
+      v-model="inputEmail"
     />
     <UiInput
       class="auth-form__item"
       :label="'Password'"
       :type="'password'"
+      v-model="inputPassword"
     />
   </form>
 </template>
 
 <script lang="ts">
-import { defineComponent } from 'vue'
-import { mapState } from 'vuex'
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import UiInput from './ui/UiInput.vue'
 
 export default defineComponent({
@@ -25,19 +27,18 @@ export default defineComponent({
   components: {
     UiInput
   },
-  data() {
+  setup() {
+    const store = useStore()
+    const isLoginForm = ref(true)
+
     return {
-      isLoginForm: true,
-    };
+      inputEmail: ref(''),
+      inputPassword: ref(''),
+      isLoginForm,
+      authFormTitle: computed(() => isLoginForm ? 'Login' : 'Registration'),
+      isAuth: computed(() => store.state.account.isAuth),
+    }
   },
-  computed: {
-    ...mapState({
-      isAuth: (state: any) => state.account.isAuth,
-    }),
-    authFormTitle() {
-      return this.isLoginForm ? 'Login' : 'Registration';
-    },
-  }
 })
 </script>
 

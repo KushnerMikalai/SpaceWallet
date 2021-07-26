@@ -5,7 +5,13 @@
       <div class="ui-input__content">
         <input
           class="ui-input__field"
+          ref="input"
           :type="type"
+          :placeholder="placeholder"
+          :autocomplete="autocomplete"
+          @input="handleInput"
+          @change="handleChange"
+          @keydown="handleKeydown"
         >
         <i class="ui-input__field-after"></i>
       </div>
@@ -13,16 +19,80 @@
   </div>
 </template>
 
-<script>
-import { defineComponent } from 'vue'
+<script lang='ts'>
+import {
+  defineComponent,
+  nextTick,
+  computed,
+  ref
+} from 'vue'
+import { UPDATE_MODEL_EVENT } from '../../utils/constants'
 
 export default defineComponent({
+  name: 'UiInput',
   props: {
-    label: String,
-    type: {type: String, default: 'text'}
+    modelValue: {
+      type: [String, Number],
+      default: '',
+    },
+    autocomplete: {
+      type: String,
+      default: 'off',
+      validator: (val: string) => ['on', 'off'].includes(val),
+    },
+    placeholder: {
+      type: String,
+    },
+    label: {
+      type: String,
+    },
+    type: {
+      type: String,
+      default: 'text',
+    },
+    maxlength: {
+      type: [Number, String],
+    },
   },
-  setup() {
+  emits: [UPDATE_MODEL_EVENT, 'input', 'change', 'keydown'],
+  setup(props, ctx) {
+    const input = ref(null)
+    const textarea = ref(null)
 
+    const nativeInputValue = computed(() => (props.modelValue === null || props.modelValue === undefined) ? '' : String(props.modelValue))
+    const inputOrTextarea = computed(() => input.value || textarea.value)
+
+    const handleInput = event => {
+      let { value } = event.target
+      if (value === nativeInputValue.value ) return
+
+      ctx.emit(UPDATE_MODEL_EVENT, value)
+      ctx.emit('input', value)
+      nextTick(setNativeInputValue)
+    }
+
+    const setNativeInputValue = () => {
+      const input = inputOrTextarea.value
+      if (!input || input.value === nativeInputValue.value) return
+
+      input.value = nativeInputValue.value
+    }
+
+    const handleChange = event => {
+      ctx.emit('change', event.target.value)
+    }
+
+    const handleKeydown = e => {
+      ctx.emit('keydown', e)
+    }
+
+     return {
+      input,
+      textarea,
+      handleInput,
+      handleChange,
+      handleKeydown,
+    }
   },
 })
 </script>
