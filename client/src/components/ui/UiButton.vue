@@ -17,9 +17,9 @@
 import {defineComponent} from 'vue'
 import type { PropType } from 'vue'
 
-type IButtonNativeType = PropType<'button' | 'submit' | 'reset'>
+type UiButtonNativeType = PropType<'button' | 'submit' | 'reset'>
 
-interface IButtonProps {
+interface UiButtonProps {
   nativeType: string
   loading: boolean
   disabled: boolean
@@ -30,7 +30,7 @@ export default defineComponent({
   name: 'UiButton',
   props: {
     nativeType: {
-      type: String as IButtonNativeType,
+      type: String as UiButtonNativeType,
       default: 'button',
       validator: (val: string) => ['button', 'submit', 'reset'].includes(val),
     },
@@ -39,7 +39,7 @@ export default defineComponent({
     autofocus: Boolean,
   },
   emits: ['click'],
-  setup(props: IButtonProps, ctx) {
+  setup(props: UiButtonProps, ctx) {
     const handleClick = (event: MouseEvent) => {
       ctx.emit('click', event)
     }
