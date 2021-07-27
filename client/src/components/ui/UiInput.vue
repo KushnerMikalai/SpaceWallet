@@ -4,14 +4,14 @@
       <span class="ui-input__label-text">{{ label }}</span>
       <div class="ui-input__content">
         <input
-          class="ui-input__field"
-          ref="input"
-          :type="type"
-          :placeholder="placeholder"
-          :autocomplete="autocomplete"
-          @input="handleInput"
-          @change="handleChange"
-          @keydown="handleKeydown"
+            class="ui-input__field"
+            ref="input"
+            :type="type"
+            :placeholder="placeholder"
+            :autocomplete="autocomplete"
+            @input="handleInput"
+            @change="handleChange"
+            @keydown="handleKeydown"
         >
         <i class="ui-input__field-after"></i>
       </div>
@@ -24,7 +24,8 @@ import {
   defineComponent,
   nextTick,
   computed,
-  ref
+  ref,
+  watch,
 } from 'vue'
 import { UPDATE_MODEL_EVENT } from '../../utils/constants'
 
@@ -63,7 +64,7 @@ export default defineComponent({
     const inputOrTextarea = computed(() => input.value || textarea.value)
 
     const handleInput = event => {
-      let { value } = event.target
+      let {value} = event.target
       if (value === nativeInputValue.value) return
 
       ctx.emit(UPDATE_MODEL_EVENT, value)
@@ -85,6 +86,10 @@ export default defineComponent({
     const handleKeydown = event => {
       ctx.emit('keydown', event)
     }
+
+    watch(nativeInputValue, () => {
+      setNativeInputValue()
+    })
 
     return {
       input,
@@ -112,8 +117,8 @@ export default defineComponent({
 
 .ui-input__content {
   box-shadow: none;
-  margin: 0px;
-  padding: 0px;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
   cursor: text;
   height: 32px;
@@ -130,21 +135,21 @@ export default defineComponent({
   font-size: 14px;
   font-weight: 400;
   box-shadow: none;
-  margin: 0px;
-  padding: 0px 8px;
+  margin: 0;
+  padding: 0 8px;
   box-sizing: border-box;
-  border-radius: 0px;
+  border-radius: 0;
   border: none;
   background: none transparent;
   color: rgb(50, 49, 48);
   width: 100%;
-  min-width: 0px;
+  min-width: 0;
   text-overflow: ellipsis;
-  outline: 0px;
+  outline: 0;
 }
 
 .ui-input__field:focus {
-  outline: 0px;
+  outline: 0;
 }
 
 .ui-input__field:focus + .ui-input__field-after {

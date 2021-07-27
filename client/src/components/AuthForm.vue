@@ -56,6 +56,9 @@ export default defineComponent({
         if (res && res?.access_token && res?.refresh_token) {
           localStorage.setItem('accessToken', res.access_token)
           localStorage.setItem('refreshToken', res.refresh_token)
+
+          inputEmail.value = ''
+          inputPassword.value = ''
         }
       } catch (e) {
         console.log('Error Login')

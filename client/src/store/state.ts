@@ -1,7 +1,9 @@
 export interface State {
-    count: number
+  appData: any // TODO set type
+  loading: boolean
 }
 
 export default {
-    count: 0,
+  appData: null,
+  loading: true,
 }

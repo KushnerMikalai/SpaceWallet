@@ -1,4 +1,4 @@
-import axios, {AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse} from 'axios'
+import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 interface RefreshToken {
   status: number;
@@ -51,7 +51,11 @@ abstract class HttpClient {
   protected _handleError = async (error: AxiosError) => {
     const originalRequest = error.config
 
-    if (error.response?.status === 401) {
+    if (
+      error?.response?.data?.status === 401 &&
+      error?.response?.data?.message === 'unauthorized_user' &&
+      this.refreshToken
+    ) {
       try {
         const res = await this.getRefreshToken()
         if (res.status === 200) {

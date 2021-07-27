@@ -4,7 +4,7 @@ import { requestValidator, userGuard } from "../middlewares/middlewares.ts";
 
 import * as authRoutes from "./auth.routes.ts";
 import * as userRoutes from "./user.routes.ts";
-import * as appRoures from "./app.routes.ts";
+import * as appRoutes from "./app.routes.ts";
 
 const userSchema = {
   name: [validasaur.required, validasaur.minLength(3)],
@@ -21,7 +21,7 @@ router
   .get(
     "/app",
     userGuard(),
-    appRoures.getAppData,
+    appRoutes.getAppData,
   );
 
 router

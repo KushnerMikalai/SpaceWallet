@@ -71,7 +71,7 @@ export const loginUser = async (credential: LoginCredential) => {
       throw new httpErrors.Unauthorized("Inactive user status");
     }
   } else {
-    throw new httpErrors.Unauthorized("Wrong credential");
+    throw new httpErrors.Unauthorized("wrong_credential");
   }
 };
 

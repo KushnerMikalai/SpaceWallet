@@ -1,7 +1,10 @@
 import { State } from './state'
 
 export const mutations = {
-    increment (state: State) {
-        state.count++
-    },
+  setAppData(state: State, payload: any) {
+    state.appData = payload
+  },
+  setLoading(state: State, payload: boolean) {
+    state.loading = payload
+  }
 }
