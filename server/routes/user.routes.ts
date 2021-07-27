@@ -1,6 +1,6 @@
-import { helpers, httpErrors, Status } from "../deps.ts";
+import { Context, helpers, httpErrors, Status } from "../deps.ts";
 import * as userService from "../services/user.service.ts";
-import { Context, UserRole } from "../types.ts";
+import { UserRole } from "../types.ts";
 import { hasUserRole } from "../helpers/roles.ts";
 
 const getUsers = async (ctx: Context) => {
