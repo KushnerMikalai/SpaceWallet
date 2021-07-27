@@ -3,12 +3,13 @@ import axios, {AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse} fro
 interface RefreshToken {
   status: number;
   data: {
-      access_token: string;
+    access_token: string;
   }
 }
 
 declare module 'axios' {
-  interface AxiosResponse<T = any> extends Promise<T> {}
+  interface AxiosResponse<T = any> extends Promise<T> {
+  }
 }
 
 abstract class HttpClient {
@@ -54,11 +55,11 @@ abstract class HttpClient {
       try {
         const res = await this.getRefreshToken()
         if (res.status === 200) {
-            this.accessToken = res.data.access_token
-            localStorage.setItem('accessToken', this.accessToken)
-            return this.instance(originalRequest)
+          this.accessToken = res.data.access_token
+          localStorage.setItem('accessToken', this.accessToken)
+          return this.instance(originalRequest)
         }
-      } catch(e) {
+      } catch (e) {
         return Promise.reject(error)
       }
     } else {
@@ -68,8 +69,8 @@ abstract class HttpClient {
 
   private _initializeResponseInterceptor = () => {
     this.instance.interceptors.response.use(
-        this._handleResponse,
-        this._handleError,
+      this._handleResponse,
+      this._handleError,
     )
   }
 }

@@ -25,8 +25,8 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, computed } from 'vue'
-import { useStore } from 'vuex'
+import {defineComponent, ref, computed} from 'vue'
+import {useStore} from 'vuex'
 import UiInput from './ui/UiInput.vue'
 import UiButton from './ui/UiButton.vue'
 import api from '../api/api'
@@ -57,7 +57,7 @@ export default defineComponent({
           localStorage.setItem('accessToken', res.access_token)
           localStorage.setItem('refreshToken', res.refresh_token)
         }
-      } catch(e) {
+      } catch (e) {
         console.log('Error Login')
       }
     }
