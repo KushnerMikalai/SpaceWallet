@@ -49,6 +49,8 @@ export default defineComponent({
 
           inputEmail.value = ''
           inputPassword.value = ''
+
+          store.dispatch('getAppData')
         }
       } catch (e) {
         console.log('error_login')
@@ -60,7 +62,6 @@ export default defineComponent({
       inputPassword,
       isLoginForm,
       authFormTitle: computed(() => (isLoginForm ? 'Login' : 'Registration')),
-      isAuth: computed(() => store.state.account.isAuth),
       handleSubmit
     }
   }

@@ -1,34 +1,25 @@
 <template>
-    <h1>Testing API</h1>
-    <UiButton class="button" @click="userGetOne">userGetOne</UiButton>
-    <AuthForm/>
+  <h1 v-if="isAuthenticated">Hello Bro!</h1>
+  <AuthForm v-else />
 </template>
 
 <script lang="ts">
-import {defineComponent, defineAsyncComponent} from 'vue'
-import UiButton from '../components/ui/UiButton.vue'
-import api from '../api/api'
+import { defineComponent, defineAsyncComponent, computed } from 'vue'
+import { useStore } from 'vuex'
 
 export default defineComponent({
-    name: 'index',
-    components: {
-        UiButton,
-        AuthForm: defineAsyncComponent(() => import('../components/AuthForm.vue'))
-    },
-    methods: {
-      async userGetOne() {
-        try {
-          await api.user.getOne({id: 1})
-        } catch(e) {
-          console.log('Error Get User')
-        }
-      },
-    },
+  name: 'index',
+  components: {
+    AuthForm: defineAsyncComponent(() => import('../components/AuthForm.vue'))
+  },
+  setup() {
+    const store = useStore()
+
+    return {
+      isAuthenticated: computed(() => store.getters.isAuthenticated)
+    }
+  }
 })
 </script>
 
-<style scoped>
-.button:not(:last-child) {
-  margin-right: 10px;
-}
-</style>
+<style scoped></style>

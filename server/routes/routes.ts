@@ -20,7 +20,6 @@ router.get("", (ctx: Context) => {
 router
   .get(
     "/app",
-    userGuard(),
     appRoutes.getAppData,
   );
 

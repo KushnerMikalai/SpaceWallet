@@ -36,6 +36,7 @@ export default defineComponent({
   grid-area: header;
   color: #000;
   background-color: #fff;
+  border-bottom: 1px solid #ccc;
 }
 
 .header__content {

@@ -1,15 +1,14 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
 
 interface RefreshToken {
-  status: number;
+  status: number
   data: {
-    access_token: string;
+    access_token: string
   }
 }
 
 declare module 'axios' {
-  interface AxiosResponse<T = any> extends Promise<T> {
-  }
+  interface AxiosResponse<T = any> extends Promise<T> {}
 }
 
 abstract class HttpClient {
@@ -27,7 +26,14 @@ abstract class HttpClient {
     this._initializeResponseInterceptor()
   }
 
+  private updateToken = () => {
+    this.accessToken = localStorage.getItem('accessToken') || ''
+    this.refreshToken = localStorage.getItem('refreshToken') || ''
+  }
+
   private handleRequest = (config: AxiosRequestConfig) => {
+    this.updateToken()
+
     if (this.accessToken) {
       config.headers['Authorization'] = `Bearer ${this.accessToken}`
     }
@@ -46,7 +52,7 @@ abstract class HttpClient {
     return axios.post(`${this.baseURL}/token`, refreshTokenRequest)
   }
 
-  private _handleResponse = ({data}: AxiosResponse) => data
+  private _handleResponse = ({ data }: AxiosResponse) => data
 
   protected _handleError = async (error: AxiosError) => {
     const originalRequest = error.config
@@ -72,10 +78,7 @@ abstract class HttpClient {
   }
 
   private _initializeResponseInterceptor = () => {
-    this.instance.interceptors.response.use(
-      this._handleResponse,
-      this._handleError,
-    )
+    this.instance.interceptors.response.use(this._handleResponse, this._handleError)
   }
 }
 

@@ -28,10 +28,6 @@ export default defineComponent({
     const store = useStore()
     const loading = computed(() => store.state.loading)
 
-    onBeforeMount(() => {
-      store.dispatch('getAppData')
-    })
-
     return {
       loading
     }

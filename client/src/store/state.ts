@@ -1,5 +1,6 @@
 export interface User {
   name: string
+  isAuth: boolean
 }
 
 export interface AppData {
