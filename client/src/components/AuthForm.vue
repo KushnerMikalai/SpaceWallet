@@ -51,7 +51,7 @@ export default defineComponent({
           inputPassword.value = ''
         }
       } catch (e) {
-        console.log('Error Login')
+        console.log('error_login')
       }
     }
 
@@ -74,6 +74,8 @@ export default defineComponent({
   padding: 10px;
   border: 1px solid #ccc;
   border-radius: 2px;
+  background: #fff;
+  text-align: center;
 }
 
 .auth-form__title {

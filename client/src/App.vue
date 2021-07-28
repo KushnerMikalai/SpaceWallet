@@ -1,7 +1,14 @@
 <template>
   <Layout>
-    <span v-if="loading">Loading...</span>
-    <router-view v-else/>
+    <main class="main">
+      <section class="section">
+        <div v-if="loading" class="section__loader">
+          <UiSpinner />
+        </div>
+        <router-view v-else />
+      </section>
+      <footer class="footer">Legal notices and such</footer>
+    </main>
   </Layout>
 </template>
 
@@ -9,11 +16,13 @@
 import { computed, defineComponent, onBeforeMount } from 'vue'
 import { useStore } from 'vuex'
 import Layout from './components/Layout.vue'
+import UiSpinner from './components/ui/UiSpinner.vue'
 
 export default defineComponent({
   name: 'App',
   components: {
-    Layout
+    Layout,
+    UiSpinner
   },
   setup() {
     const store = useStore()
@@ -24,203 +33,53 @@ export default defineComponent({
     })
 
     return {
-      loading,
+      loading
     }
-  },
+  }
 })
 </script>
 
 <style>
+@import './assets/styles/normalize.css';
+@import './assets/styles/animation.css';
+
 :root {
-  --theme: #B0BEC5;
+  --theme: #b0bec5;
 }
 
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
 
-html {
-  line-height: 1.15;
-  -webkit-text-size-adjust: 100%;
-}
-
-body {
-  margin: 0;
-}
-
-main {
-  display: block;
-}
-
-h1 {
-  font-size: 2em;
-  margin: 0.67em 0;
-}
-
-hr {
-  box-sizing: content-box;
-  height: 0;
-  overflow: visible;
-}
-
-pre {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-a {
-  background-color: transparent;
-}
-
-abbr[title] {
-  border-bottom: none;
-  text-decoration: underline;
-}
-
-b,
-strong {
-  font-weight: bolder;
-}
-
-code,
-kbd,
-samp {
-  font-family: monospace, monospace;
-  font-size: 1em;
-}
-
-small {
-  font-size: 80%;
-}
-
-sub,
-sup {
-  font-size: 75%;
-  line-height: 0;
-  position: relative;
-  vertical-align: baseline;
-}
-
-sub {
-  bottom: -0.25em;
-}
-
-sup {
-  top: -0.5em;
-}
-
-img {
-  border-style: none;
-}
-
-button,
-input,
-optgroup,
-select,
-textarea {
-  font-family: inherit;
-  font-size: 100%;
-  line-height: 1.15;
-  margin: 0;
-}
-
-button,
-input {
-  overflow: visible;
-}
-
-button,
-select {
-  text-transform: none;
-}
-
-button,
-[type="button"],
-[type="reset"],
-[type="submit"] {
-  -webkit-appearance: button;
-}
-
-button::-moz-focus-inner,
-[type="button"]::-moz-focus-inner,
-[type="reset"]::-moz-focus-inner,
-[type="submit"]::-moz-focus-inner {
-  border-style: none;
-  padding: 0;
-}
-
-button:-moz-focusring,
-[type="button"]:-moz-focusring,
-[type="reset"]:-moz-focusring,
-[type="submit"]:-moz-focusring {
-  outline: 1px dotted ButtonText;
-}
-
-fieldset {
-  padding: 0.35em 0.75em 0.625em;
-}
-
-legend {
-  box-sizing: border-box;
-  color: inherit;
-  display: table;
-  max-width: 100%;
-  padding: 0;
-  white-space: normal;
-}
-
-progress {
-  vertical-align: baseline;
-}
-
-textarea {
+.main {
+  grid-area: main;
   overflow: auto;
+  display: grid;
+  grid-template-rows: 1fr auto;
+  grid-template-columns: 1fr minmax(0, 600px) 1fr;
 }
 
-[type="checkbox"],
-[type="radio"] {
-  box-sizing: border-box;
-  padding: 0;
+.section {
+  grid-area: 1 / 1 / 1 / 4;
+  width: 100%;
+  padding: 20px;
 }
 
-
-[type="number"]::-webkit-inner-spin-button,
-[type="number"]::-webkit-outer-spin-button {
-  height: auto;
+.footer {
+  padding: 0 20px;
+  height: 54px;
+  grid-area: 2 / 1 / 2 / 4;
+  background: #fff;
 }
 
-
-[type="search"] {
-  -webkit-appearance: textfield;
-  outline-offset: -2px;
-}
-
-[type="search"]::-webkit-search-decoration {
-  -webkit-appearance: none;
-}
-
-::-webkit-file-upload-button {
-  -webkit-appearance: button;
-  font: inherit;
-}
-
-details {
-  display: block;
-}
-
-summary {
-  display: list-item;
-}
-
-template {
-  display: none;
-}
-
-[hidden] {
-  display: none;
+.section__loader {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
