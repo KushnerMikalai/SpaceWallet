@@ -1,20 +1,13 @@
 <template>
-  <button
-    class="button"
-    :disabled="disabled"
-    @click="handleClick"
-  >
-     <span
-       v-if="$slots.default"
-       class="button__value"
-     >
-       <slot></slot>
-     </span>
+  <button class="button" :disabled="disabled" @click="handleClick">
+    <span v-if="$slots.default" class="button__value">
+      <slot></slot>
+    </span>
   </button>
 </template>
 
 <script lang="ts">
-import {defineComponent} from 'vue'
+import { defineComponent } from 'vue'
 import type { PropType } from 'vue'
 
 type UiButtonNativeType = PropType<'button' | 'submit' | 'reset'>
@@ -32,11 +25,11 @@ export default defineComponent({
     nativeType: {
       type: String as UiButtonNativeType,
       default: 'button',
-      validator: (val: string) => ['button', 'submit', 'reset'].includes(val),
+      validator: (val: string) => ['button', 'submit', 'reset'].includes(val)
     },
     loading: Boolean,
     disabled: Boolean,
-    autofocus: Boolean,
+    autofocus: Boolean
   },
   emits: ['click'],
   setup(props: UiButtonProps, ctx) {
@@ -45,7 +38,7 @@ export default defineComponent({
     }
 
     return {
-      handleClick,
+      handleClick
     }
   }
 })

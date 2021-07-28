@@ -1,7 +1,7 @@
-import { State } from './state'
+import { State, AppData } from './state'
 
 export const mutations = {
-  setAppData(state: State, payload: any) {
+  setAppData(state: State, payload: AppData) {
     state.appData = payload
   },
   setLoading(state: State, payload: boolean) {

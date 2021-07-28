@@ -1,5 +1,13 @@
+export interface User {
+  name: string
+}
+
+export interface AppData {
+  user: User
+}
+
 export interface State {
-  appData: any // TODO set type
+  appData: AppData
   loading: boolean
 }
 

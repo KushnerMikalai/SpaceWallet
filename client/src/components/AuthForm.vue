@@ -1,32 +1,22 @@
 <template>
-  <form
-    class="auth-form"
-    @submit="handleSubmit"
-  >
+  <form class="auth-form" @submit="handleSubmit">
     <div class="auth-form__title">{{ authFormTitle }}</div>
-    <UiInput
-      class="auth-form__item"
-      :label="'Email'"
-      v-model="inputEmail"
-    />
-    <UiInput
+    <ui-input class="auth-form__item" :label="'Email'" v-model="inputEmail" />
+    <ui-input
       class="auth-form__item"
       :label="'Password'"
       :type="'password'"
       v-model="inputPassword"
     />
-    <UiButton
-      class="auth-form__item"
-      type="submit"
-    >
+    <ui-button class="auth-form__item" type="submit">
       {{ authFormTitle }}
-    </UiButton>
+    </ui-button>
   </form>
 </template>
 
 <script lang="ts">
-import {defineComponent, ref, computed} from 'vue'
-import {useStore} from 'vuex'
+import { defineComponent, ref, computed } from 'vue'
+import { useStore } from 'vuex'
 import UiInput from './ui/UiInput.vue'
 import UiButton from './ui/UiButton.vue'
 import api from '../api/api'
@@ -35,7 +25,7 @@ export default defineComponent({
   name: 'AuthForm',
   components: {
     UiInput,
-    UiButton,
+    UiButton
   },
   setup() {
     const isLoginForm = ref(true)
@@ -44,8 +34,8 @@ export default defineComponent({
 
     const store = useStore()
 
-    const handleSubmit = async (event) => {
-      event.preventDefault();
+    const handleSubmit = async (event: any) => {
+      event.preventDefault()
 
       try {
         const res = await api.auth.login({
@@ -69,11 +59,11 @@ export default defineComponent({
       inputEmail,
       inputPassword,
       isLoginForm,
-      authFormTitle: computed(() => isLoginForm ? 'Login' : 'Registration'),
+      authFormTitle: computed(() => (isLoginForm ? 'Login' : 'Registration')),
       isAuth: computed(() => store.state.account.isAuth),
-      handleSubmit,
+      handleSubmit
     }
-  },
+  }
 })
 </script>
 
