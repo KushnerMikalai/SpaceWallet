@@ -6,6 +6,7 @@ import router from './router'
 import './assets/styles/fabric-icons.css'
 import './assets/styles/normalize.css'
 import './assets/styles/animation.css'
+import './assets/styles/colors.css'
 
 const app = createApp(App)
 app.use(store)

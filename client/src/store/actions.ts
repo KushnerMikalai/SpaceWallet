@@ -1,8 +1,8 @@
 import api from '../api/api'
-import { ActionContext } from 'vuex'
+import { ActionContext, State, Commit } from 'vuex'
 
 export const actions = {
-  async getAppData({commit}: ActionContext<any, any>) {
+  async getAppData({ commit, dispatch }: ActionContext<State, Commit>) {
     commit('setLoading', true)
     try {
       const res = await api.app.appData()
@@ -11,8 +11,17 @@ export const actions = {
         commit('setAppData', res)
       }
     } catch (e) {
-      console.log('Error getAppData action') // TODO handle Error Front
+      dispatch(
+        'notification/create',
+        {
+          type: 'error',
+          text: 'Server error get app data',
+          close: true,
+          key: 'itemsToast'
+        },
+        { root: true }
+      )
     }
     commit('setLoading', false)
-  },
+  }
 }

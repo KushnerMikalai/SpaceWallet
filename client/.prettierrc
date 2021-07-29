@@ -5,7 +5,7 @@
   "bracketSpacing": true,
   "arrowParens": "avoid",
   "trailingComma": "none",
-  "printWidth": 100,
+  "printWidth": 120,
   "jsxBracketSameLine": false,
   "singleAttributePerLine": true,
   "html.format.wrapAttributes": "force-expand-multiline"

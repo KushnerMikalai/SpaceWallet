@@ -14,5 +14,5 @@ export const store = createStore<State>({
   actions,
   getters,
   modules,
-  strict: true,
+  strict: true
 })
