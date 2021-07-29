@@ -36,9 +36,6 @@ export default defineComponent({
 </script>
 
 <style>
-@import './assets/styles/normalize.css';
-@import './assets/styles/animation.css';
-
 :root {
   --theme: #b0bec5;
 }
