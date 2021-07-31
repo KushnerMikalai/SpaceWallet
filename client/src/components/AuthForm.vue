@@ -2,13 +2,8 @@
   <form class="auth-form" @submit="handleSubmit">
     <div class="auth-form__title">{{ authFormTitle }}</div>
     <ui-input class="auth-form__item" :label="'Email'" v-model="inputEmail" />
-    <ui-input
-      class="auth-form__item"
-      :label="'Password'"
-      :type="'password'"
-      v-model="inputPassword"
-    />
-    <ui-button class="auth-form__item" type="submit">
+    <ui-input class="auth-form__item" :label="'Password'" :type="'password'" v-model="inputPassword" />
+    <ui-button class="auth-form__item" type="submit" view="primary">
       {{ authFormTitle }}
     </ui-button>
   </form>

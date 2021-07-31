@@ -14,7 +14,7 @@ router.beforeEach(async (to, from, next) => {
   }
 
   if (!noAuthRoutes.includes(to.name) && !store.getters.isAuthenticated) {
-    next({ name: 'error' })
+    next({ name: 'error', params: { code: 401 } })
   } else {
     next()
   }

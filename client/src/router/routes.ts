@@ -14,7 +14,7 @@ const routes = [
     component: About
   },
   {
-    path: '/error',
+    path: '/error/:code',
     name: 'error',
     component: ErrorPage
   }
