@@ -1,14 +1,19 @@
 import { config } from "./../config/config.ts";
-import { getNumericDate, jwtCreate, jwtHeader, jwtVerify } from "../deps.ts";
+import { getNumericDate, jwtCreate, JWTHeader, jwtVerify } from "../deps.ts";
+
+const key = await crypto.subtle.generateKey(
+  { name: "HMAC", hash: "SHA-512" },
+  true,
+  ["sign", "verify"],
+);
 
 const {
-  JWT_TOKEN_SECRET,
   JWT_ACCESS_TOKEN_EXP,
   JWT_REFRESH_TOKEN_EXP,
 } = config;
 
-const header: jwtHeader = {
-  alg: "HS256",
+const header: JWTHeader = {
+  alg: "HS512",
   typ: "JWT",
 };
 
@@ -23,7 +28,7 @@ const getAuthToken = async (user: any): Promise<string | null> => {
     exp: getNumericDate(Number(JWT_ACCESS_TOKEN_EXP)),
   };
 
-  return await jwtCreate(header, payload, JWT_TOKEN_SECRET);
+  return await jwtCreate(header, payload, key);
 };
 
 const getRefreshToken = async (user: any): Promise<string | null> => {
@@ -34,11 +39,11 @@ const getRefreshToken = async (user: any): Promise<string | null> => {
     exp: getNumericDate(Number(JWT_REFRESH_TOKEN_EXP)),
   };
 
-  return await jwtCreate(header, payload, JWT_TOKEN_SECRET);
+  return await jwtCreate(header, payload, key);
 };
 
 const getJwtPayload = async (token: string): Promise<any | null> => {
-  return await jwtVerify(token, JWT_TOKEN_SECRET, header.alg);
+  return await jwtVerify(token, key);
 };
 
 export { getAuthToken, getJwtPayload, getRefreshToken };

@@ -4,10 +4,10 @@ import { config } from "./../config/config.ts";
 const client = new SmtpClient();
 
 await client.connectTLS({
-  hostname: "smtp.gmail.com",
+  hostname: "smtp.yandex.ru",
   port: 465,
-  username: config.GMAIL_USERNAME,
-  password: config.GMAIL_PASSWORD,
+  username: config.SMTP_USERNAME,
+  password: config.SMTP_PASSWORD,
 });
 
 let mailerObj = async (data: any) => {

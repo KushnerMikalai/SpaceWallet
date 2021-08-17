@@ -10,7 +10,7 @@
 
 
 ## Environment:
-* Deno - 1.11.0
+* Deno - 1.13.1
 * Node - 14.15.4
 * NPM - 7.17.0
 
@@ -24,6 +24,10 @@
 > Before PUSH you need run $ deno fmt
 > _To work go to the folder **server**_
 
+## ROU DENO SERVER
+```bash
+deno run --unstable --watch --allow-read --allow-net app.ts
+```
 
 ## DOCKER
 For Docker: Up docker-compose, this will create a docker container with the database with the given name in env.
@@ -32,7 +36,6 @@ $ docker-compose up --build
 or
 $ docker-compose up -d
 ```
-
 
 ### RUN ONLU DB DOCKER
 Go to server folder and run:
