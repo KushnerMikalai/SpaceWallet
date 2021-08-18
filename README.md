@@ -24,12 +24,12 @@
 > Before PUSH you need run $ deno fmt
 > _To work go to the folder **server**_
 
-## ROU DENO SERVER
+### RUN DENO SERVER
 ```bash
 deno run --unstable --watch --allow-read --allow-net app.ts
 ```
 
-## DOCKER
+### DOCKER
 For Docker: Up docker-compose, this will create a docker container with the database with the given name in env.
 ```bash
 $ docker-compose up --build
@@ -37,18 +37,18 @@ or
 $ docker-compose up -d
 ```
 
-### RUN ONLU DB DOCKER
+### RUN ONLY DB DOCKER
 Go to server folder and run:
 ```bush
 docker-compose -f docker-compose.db.yml up -d
 ```
 
-## API
+### API
 Browse API at http://localhost:8000
 Browse (for Docker only) DB Adminer at http://localhost:8080
 Browse Swagger Open API Doc at http://localhost:8105
 
-## DB
+### DB
 > for start local db you need restore
 > Restore DB:
 ```bash
