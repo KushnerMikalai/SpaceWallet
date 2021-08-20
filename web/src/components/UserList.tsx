@@ -8,7 +8,7 @@ const UserList: React.FC = () => {
 
   useEffect(() => {
     fetchUsers()
-  }, [])
+  }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (loading) {
     return <h1>Loading users...</h1>
