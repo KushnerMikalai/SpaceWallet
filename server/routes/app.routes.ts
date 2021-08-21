@@ -11,7 +11,7 @@ const getAppData = async (ctx: Context) => {
   user.isAuth = Boolean(stateUserId);
 
   ctx.response.body = {
-    user,
+    account: user,
   };
 };
 
