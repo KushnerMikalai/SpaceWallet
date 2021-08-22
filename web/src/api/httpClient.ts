@@ -12,6 +12,7 @@ declare module 'axios' {
 }
 
 abstract class HttpClient {
+  // TODO accessToken and refreshToken move to cookie; baseURL move to variable env
   protected accessToken: string = localStorage.getItem('accessToken') || ''
   protected refreshToken: string = localStorage.getItem('refreshToken') || ''
   protected readonly baseURL: string = 'http://localhost:8000'

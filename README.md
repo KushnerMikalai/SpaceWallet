@@ -5,8 +5,7 @@
     * MySQL
     * Adminer
 * Client
-    * Vite
-    * Vue (TypeScript)
+    * ?
 
 
 ## Environment:
