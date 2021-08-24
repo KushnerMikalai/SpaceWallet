@@ -1,11 +1,7 @@
-import authService from './services/authService'
-import userService from './services/userService'
-import { AppApiProtected as appService } from './services/appService'
+import { AuthApiProtected } from './services/authService'
+import { UserApiProtected } from './services/userService'
+import { AppApiProtected } from './services/appService'
 
-const api = {
-  auth: new authService(),
-  user: new userService(),
-  app: new appService(),
-}
-
-export default api
+export const userService = new UserApiProtected()
+export const authService = new AuthApiProtected()
+export const appService = new AppApiProtected()
