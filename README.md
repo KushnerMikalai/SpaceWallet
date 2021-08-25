@@ -5,8 +5,8 @@
     * MySQL
     * Adminer
 * Client
-    * ?
-
+    * react (TypeScript)
+    * redux
 
 ## Environment:
 * Deno - 1.13.1
