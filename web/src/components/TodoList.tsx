@@ -9,7 +9,7 @@ const TodoList: React.FC = () => {
 
   useEffect(() => {
     fetchTodos(page, limit)
-  }, [page])  // eslint-disable-line react-hooks/exhaustive-deps
+  }, [page]) // eslint-disable-line react-hooks/exhaustive-deps
 
   if (error) {
     return <h1>{error}</h1>

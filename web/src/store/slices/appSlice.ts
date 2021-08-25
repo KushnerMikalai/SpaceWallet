@@ -3,7 +3,7 @@ import { AppThunk } from '../'
 import { appService } from '../../api'
 
 interface AppState {
-  app: any
+  account: any
   loading: boolean
   error: null | string
 }
@@ -13,7 +13,7 @@ interface AppLoaded {
 }
 
 const initialState: AppState = {
-  app: {},
+  account: null,
   loading: false,
   error: null
 }
@@ -27,7 +27,9 @@ const app = createSlice({
       state.error = null
     },
     getAppSuccess(state, action: PayloadAction<AppLoaded>) {
-      state.app = action.payload
+      const { account } = action.payload
+
+      state.account = account
       state.loading = false
       state.error = null
     },
@@ -47,6 +49,6 @@ export const fetchApp = (): AppThunk => async dispatch => {
     const app = await appService.appData()
     dispatch(getAppSuccess(app))
   } catch (err) {
-    dispatch(getAppFailure(err))
+    dispatch(getAppFailure(err.toString()))
   }
 }
