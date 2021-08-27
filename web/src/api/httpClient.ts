@@ -1,4 +1,5 @@
 import axios, { AxiosInstance, AxiosError, AxiosRequestConfig, AxiosResponse } from 'axios'
+import { API_HOST } from '../utils/consts'
 
 interface RefreshToken {
   status: number
@@ -12,15 +13,19 @@ declare module 'axios' {
 }
 
 abstract class HttpClient {
-  // TODO accessToken and refreshToken move to cookie; baseURL move to variable env
   protected accessToken: string = localStorage.getItem('accessToken') || ''
   protected refreshToken: string = localStorage.getItem('refreshToken') || ''
-  protected readonly baseURL: string = 'http://localhost:8000'
+  protected readonly baseURL: string = API_HOST
   protected readonly instance: AxiosInstance
 
   public constructor() {
     this.instance = axios.create({
-      baseURL: this.baseURL
+      // withCredentials: true,
+      // xsrfCookieName: "access_token",
+      baseURL: this.baseURL,
+      // headers: {
+        // 'Access-Control-Allow-Origin': '*',
+      // },
     })
 
     this._initializeRequestInterceptor()

@@ -1,16 +1,26 @@
 import React, { useState } from 'react'
 import { useTypedSelector } from '../hooks/useTypedSelector'
+import { useActions } from '../hooks/useActions'
 
 const Index: React.FC = () => {
   const { account } = useTypedSelector(state => state.app)
+  const { fetchLogin } = useActions()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = async (e: any) => {
     e.preventDefault()
-    console.log(`email => ${email}`)
-    console.log(`password => ${password}`)
-    // TODO FETCH AUTH
+
+    fetchLogin({email, password})
+    // await fetch('http://localhost:8000/login', {
+    //   method: 'post',
+    //   headers: {
+    //     Accept: 'application/json',
+    //     'Content-Type': 'application/json',
+    //   },
+    //   credentials: 'same-origin',
+    //   body:JSON.stringify({email, password})
+    // })
   }
 
   const formStyle = {

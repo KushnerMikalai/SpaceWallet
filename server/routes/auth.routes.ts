@@ -30,7 +30,21 @@ const loginSchema = {
 const login = async (ctx: Context) => {
   const request = ctx.request;
   const credential = await request.body().value as unknown as LoginCredential;
-  ctx.response.body = await authService.loginUser(credential);
+  const tokens = await authService.loginUser(credential);
+  ctx.response.headers.append("Access-Control-Expose-Headers", '*');
+
+  // TODO
+  await ctx.cookies.set('access_token', tokens.access_token, {
+    httpOnly: true,
+    path: '/',
+    // secure: false,
+    maxAge: 1209600,
+    // domain: '127.0.0.1',
+    expires: new Date()
+  });
+  // await ctx.cookies.set('refresh_token', tokens.refresh_token, { httpOnly: true, path: '/' });
+
+  ctx.response.body = tokens;
 };
 
 /**
