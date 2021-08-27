@@ -19,10 +19,7 @@ abstract class HttpClient {
   protected readonly instance: AxiosInstance
 
   public constructor() {
-    this.instance = axios.create({
-      withCredentials: true,
-      baseURL: this.baseURL,
-    })
+    this.instance = axios.create()
 
     this._initializeRequestInterceptor()
     this._initializeResponseInterceptor()
