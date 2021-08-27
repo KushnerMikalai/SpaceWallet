@@ -6,10 +6,10 @@ import { Context } from "./types.ts";
 const port = 8000;
 const app = new Application<Context>();
 
-// app.use(oakCors({
-//   origin: "http://localhost:3000",
-// }));
-app.use(oakCors());
+app.use(oakCors({
+  origin: "http://localhost:3000",
+  credentials: true
+}))
 app.use(middlewares.loggerMiddleware);
 app.use(middlewares.errorMiddleware);
 app.use(middlewares.timingMiddleware);

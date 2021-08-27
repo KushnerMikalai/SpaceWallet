@@ -34,15 +34,17 @@ const login = async (ctx: Context) => {
   ctx.response.headers.append("Access-Control-Expose-Headers", '*');
 
   // TODO
-  await ctx.cookies.set('access_token', tokens.access_token, {
+  const options: any = {
     httpOnly: true,
     path: '/',
-    // secure: false,
+    sameSite: 'strict',
     maxAge: 1209600,
-    // domain: '127.0.0.1',
+    domain: 'localhost',
     expires: new Date()
-  });
-  // await ctx.cookies.set('refresh_token', tokens.refresh_token, { httpOnly: true, path: '/' });
+  }
+
+  await ctx.cookies.set('access_token', tokens.access_token, options);
+  await ctx.cookies.set('refresh_token', tokens.refresh_token, options);
 
   ctx.response.body = tokens;
 };

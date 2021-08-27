@@ -20,12 +20,8 @@ abstract class HttpClient {
 
   public constructor() {
     this.instance = axios.create({
-      // withCredentials: true,
-      // xsrfCookieName: "access_token",
+      withCredentials: true,
       baseURL: this.baseURL,
-      // headers: {
-        // 'Access-Control-Allow-Origin': '*',
-      // },
     })
 
     this._initializeRequestInterceptor()
