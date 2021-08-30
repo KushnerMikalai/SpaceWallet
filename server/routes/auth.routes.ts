@@ -61,6 +61,16 @@ const refreshToken = async (ctx: Context) => {
   ctx.response.body = await authService.refreshToken(data.refresh_token);
 };
 
+/**
+ * AUTH CHECK TOKENS
+ */
+const checkTokens = async (ctx: Context) => {
+  ctx.response.body = {
+    refresh_token: ctx.cookies.get('refresh_token') || 'no refresh_token',
+    access_token: ctx.cookies.get('access_token') || 'no access_token'
+  };
+};
+
 export {
   login,
   loginSchema,
@@ -68,4 +78,5 @@ export {
   refreshTokenSchema,
   register,
   registrationSchema,
+  checkTokens,
 };

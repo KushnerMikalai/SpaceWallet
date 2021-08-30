@@ -26,6 +26,7 @@ abstract class HttpClient {
   }
 
   private updateToken = () => {
+    // TODO
     this.accessToken = localStorage.getItem('accessToken') || ''
     this.refreshToken = localStorage.getItem('refreshToken') || ''
   }

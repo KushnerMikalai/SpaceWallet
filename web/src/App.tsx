@@ -4,10 +4,15 @@ import AppRouter from './components/AppRouter'
 import { useActions } from './hooks/useActions'
 
 const App = () => {
-  const { fetchApp } = useActions()
+  const { fetchApp, fetchCheckTokens } = useActions()
+
+  const initialApp = async () => {
+    await fetchCheckTokens()
+    fetchApp()
+  }
 
   useEffect(() => {
-    fetchApp()
+    initialApp()
   }, []) // eslint-disable-line react-hooks/exhaustive-deps
 
   return (

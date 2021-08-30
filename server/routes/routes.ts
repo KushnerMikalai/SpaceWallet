@@ -24,6 +24,10 @@ router
   );
 
 router
+  .get(
+    "/check-tokens",
+    authRoutes.checkTokens,
+  )
   .post(
     "/login",
     requestValidator({ bodyRules: authRoutes.loginSchema }),

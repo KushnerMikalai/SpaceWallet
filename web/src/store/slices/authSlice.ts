@@ -7,6 +7,7 @@ interface AuthState {
   refreshToken: null | string
   loading: boolean
   error: null | string
+  isAuthenticated: boolean
 }
 
 interface AuthLogin {
@@ -24,6 +25,7 @@ const initialState: AuthState = {
   refreshToken: null,
   error: null,
   loading: false,
+  isAuthenticated: false,
 }
 
 const authSlice = createSlice({
@@ -56,8 +58,16 @@ export const fetchLogin = (form: LoginForm): AppThunk => async dispatch => {
   try {
     dispatch(getAuthStart())
     const res = await authService.login(form)
-    console.log(res, 'fetchLogin');
+    dispatch(getAuthSuccess(res))
+  } catch (err) {
+    dispatch(getAuthFailure(err.toString()))
+  }
+}
 
+export const fetchCheckTokens = (): AppThunk => async dispatch => {
+  try {
+    dispatch(getAuthStart())
+    const res = await authService.checkTokens()
     dispatch(getAuthSuccess(res))
   } catch (err) {
     dispatch(getAuthFailure(err.toString()))
