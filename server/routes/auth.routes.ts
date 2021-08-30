@@ -31,14 +31,13 @@ const login = async (ctx: Context) => {
   const request = ctx.request;
   const credential = await request.body().value as unknown as LoginCredential;
   const tokens = await authService.loginUser(credential);
-  ctx.response.headers.append("Access-Control-Expose-Headers", '*');
 
   // TODO
   const options: any = {
     httpOnly: true,
     path: '/',
     sameSite: 'strict',
-    maxAge: 1209600,
+    maxAge: 3600,
     domain: 'localhost',
     expires: new Date()
   }

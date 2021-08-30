@@ -12,15 +12,6 @@ const Index: React.FC = () => {
     e.preventDefault()
 
     fetchLogin({email, password})
-    // await fetch('http://localhost:8000/login', {
-    //   method: 'post',
-    //   headers: {
-    //     Accept: 'application/json',
-    //     'Content-Type': 'application/json',
-    //   },
-    //   credentials: 'same-origin',
-    //   body:JSON.stringify({email, password})
-    // })
   }
 
   const formStyle = {
@@ -56,6 +47,7 @@ const Index: React.FC = () => {
         <br />
         <button>Auth</button>
       </form>
+
       {JSON.stringify(account)}
     </div>
   )
