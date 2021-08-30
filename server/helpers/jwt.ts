@@ -12,10 +12,7 @@ const {
   JWT_REFRESH_TOKEN_EXP,
 } = config;
 
-const header: JWTHeader = {
-  alg: "HS512",
-  typ: "JWT",
-};
+const header: JWTHeader = { alg: "HS512", typ: "JWT" };
 
 const getAuthToken = async (user: any): Promise<string | null> => {
   const payload = {

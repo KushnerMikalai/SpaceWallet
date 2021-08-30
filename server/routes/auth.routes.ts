@@ -1,6 +1,23 @@
 import { CreateUser, LoginCredential, RefreshToken } from "./../types.ts";
 import { Context, validasaur } from "../deps.ts";
 import * as authService from "./../services/auth.service.ts";
+import { config } from "./../config/config.ts";
+import { Tokens } from "../types/auth.types.ts";
+
+const {
+  JWT_ACCESS_TOKEN_EXP,
+  JWT_REFRESH_TOKEN_EXP,
+} = config;
+
+const options: any = {
+  httpOnly: true,
+  path: "/",
+  sameSite: "strict",
+};
+
+const getExpires = (exp: number) => {
+  return new Date(Date.now() + exp * 1000);
+};
 
 /**
  * REGISTER
@@ -32,18 +49,22 @@ const login = async (ctx: Context) => {
   const credential = await request.body().value as unknown as LoginCredential;
   const tokens = await authService.loginUser(credential);
 
-  // TODO
-  const options: any = {
-    httpOnly: true,
-    path: '/',
-    sameSite: 'strict',
-    maxAge: 3600,
-    domain: 'localhost',
-    expires: new Date()
-  }
-
-  await ctx.cookies.set('access_token', tokens.access_token, options);
-  await ctx.cookies.set('refresh_token', tokens.refresh_token, options);
+  await ctx.cookies.set(
+    "access_token",
+    tokens.access_token,
+    {
+      ...options,
+      expires: getExpires(Number(JWT_ACCESS_TOKEN_EXP)),
+    },
+  );
+  await ctx.cookies.set(
+    "refresh_token",
+    tokens.refresh_token,
+    {
+      ...options,
+      expires: getExpires(Number(JWT_REFRESH_TOKEN_EXP)),
+    },
+  );
 
   ctx.response.body = tokens;
 };
@@ -65,18 +86,48 @@ const refreshToken = async (ctx: Context) => {
  * AUTH CHECK TOKENS
  */
 const checkTokens = async (ctx: Context) => {
-  ctx.response.body = {
-    refresh_token: ctx.cookies.get('refresh_token') || 'no refresh_token',
-    access_token: ctx.cookies.get('access_token') || 'no access_token'
+  const accessToken = ctx.cookies.get("access_token");
+  const refreshToken = ctx.cookies.get("refresh_token");
+  const body: Tokens = {
+    "access_token": refreshToken || null,
+    "refresh_token": refreshToken || null,
   };
+
+  if (!accessToken && refreshToken) {
+    const res = await authService.refreshToken(refreshToken);
+
+    if (res) {
+      body.access_token = res.access_token || null;
+      body.refresh_token = res.refresh_token || null;
+    }
+  }
+
+  await ctx.cookies.set(
+    "access_token",
+    body.access_token,
+    {
+      ...options,
+      expires: getExpires(Number(JWT_ACCESS_TOKEN_EXP)),
+    },
+  );
+  await ctx.cookies.set(
+    "refresh_token",
+    body.refresh_token,
+    {
+      ...options,
+      expires: getExpires(Number(JWT_REFRESH_TOKEN_EXP)),
+    },
+  );
+
+  ctx.response.body = body;
 };
 
 export {
+  checkTokens,
   login,
   loginSchema,
   refreshToken,
   refreshTokenSchema,
   register,
   registrationSchema,
-  checkTokens,
 };

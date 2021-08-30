@@ -12,7 +12,6 @@ const getAppData = async (ctx: Context) => {
 
   ctx.response.body = {
     account: user,
-    cookies: ctx.cookies.get('access_token') || 'no_access_token_cookies'
   };
 };
 

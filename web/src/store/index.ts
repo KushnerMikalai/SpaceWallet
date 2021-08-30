@@ -1,10 +1,16 @@
-import { configureStore, Action } from '@reduxjs/toolkit'
+import { configureStore, Action, ConfigureStoreOptions } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 import rootReducer, { RootState } from './rootReducer'
 
-const store = configureStore({
-  reducer: rootReducer
-})
+export const createStore = (options?: ConfigureStoreOptions['preloadedState'] | undefined) =>
+  configureStore({
+    reducer: rootReducer,
+    middleware: (getDefaultMiddleware) =>
+      getDefaultMiddleware().concat(),
+    ...options,
+  });
+
+const store = createStore()
 
 if (process.env.NODE_ENV === 'development' && module.hot) {
   module.hot.accept('./rootReducer', () => {
@@ -14,5 +20,6 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
 }
 
 export type AppDispatch = typeof store.dispatch
+// export type RootState = ReturnType<typeof store.getState>
 export type AppThunk = ThunkAction<void, RootState, null, Action<string>>
 export default store

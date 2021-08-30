@@ -89,6 +89,7 @@ export const refreshToken = async (token: string) => {
         }
         return {
           "access_token": await jwt.getAuthToken(user),
+          "refresh_token": await jwt.getRefreshToken(user),
         };
       }
     } else {
