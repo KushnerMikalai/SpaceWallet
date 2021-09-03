@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../'
 import { appService } from '../../api'
+import { appApi } from '../services/appService'
 
 interface AppState {
   account: any
@@ -37,7 +38,20 @@ const app = createSlice({
       state.loading = false
       state.error = action.payload
     }
-  }
+  },
+  extraReducers: (builder) => {
+    builder
+      .addMatcher(appApi.endpoints.getApp.matchPending, (state, action) => {
+        console.log('pending', action);
+      })
+      .addMatcher(appApi.endpoints.getApp.matchFulfilled, (state, action) => {
+        console.log('fulfilled', action);
+        state.account = action.payload.account;
+      })
+      .addMatcher(appApi.endpoints.getApp.matchRejected, (state, action) => {
+        console.log('rejected', action);
+      });
+  },
 })
 
 export const { getAppStart, getAppSuccess, getAppFailure } = app.actions

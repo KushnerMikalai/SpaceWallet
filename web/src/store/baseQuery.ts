@@ -12,4 +12,4 @@ export const baseQuery = fetchBaseQuery({
   },
 });
 
-export const baseQueryWithRetry = retry(baseQuery, { maxRetries: 6 })
+export const baseQueryWithRetry = retry(baseQuery, { maxRetries: 1 })

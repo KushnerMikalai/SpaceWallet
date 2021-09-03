@@ -1,19 +1,11 @@
-import { useEffect } from 'react'
 import { BrowserRouter } from 'react-router-dom'
 import AppRouter from './components/AppRouter'
-import { useActions } from './hooks/useActions'
+import { useGetAppQuery } from './store/services/appService'
+import { useChackTokensQuery } from './store/services/authService'
 
 const App = () => {
-  const { fetchApp, fetchCheckTokens } = useActions()
-
-  const initialApp = async () => {
-    await fetchCheckTokens()
-    fetchApp()
-  }
-
-  useEffect(() => {
-    initialApp()
-  }, []) // eslint-disable-line react-hooks/exhaustive-deps
+  useChackTokensQuery(null)
+  useGetAppQuery(null)
 
   return (
     <BrowserRouter>

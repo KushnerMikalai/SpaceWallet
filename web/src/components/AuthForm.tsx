@@ -10,7 +10,6 @@ const Index: React.FC = () => {
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-
     fetchLogin({email, password})
   }
 

@@ -1,12 +1,15 @@
 import { configureStore, Action, ConfigureStoreOptions } from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 import rootReducer, { RootState } from './rootReducer'
+import { setupListeners } from '@reduxjs/toolkit/query/react'
+import { appApi } from './services/appService'
+import { authApi } from './services/authService'
 
 export const createStore = (options?: ConfigureStoreOptions['preloadedState'] | undefined) =>
   configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(),
+      getDefaultMiddleware().concat(appApi.middleware, authApi.middleware),
     ...options,
   });
 
@@ -19,7 +22,8 @@ if (process.env.NODE_ENV === 'development' && module.hot) {
   })
 }
 
+setupListeners(store.dispatch)
+
 export type AppDispatch = typeof store.dispatch
-// export type RootState = ReturnType<typeof store.getState>
 export type AppThunk = ThunkAction<void, RootState, null, Action<string>>
 export default store
