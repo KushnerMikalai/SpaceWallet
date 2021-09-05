@@ -4,20 +4,23 @@ import { useActions } from '../hooks/useActions'
 
 const Index: React.FC = () => {
   const { account } = useTypedSelector(state => state.app)
-  const { fetchLogin } = useActions()
+  const { fetchLogin, fetchApp } = useActions()
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
   const handleSubmit = async (e: any) => {
     e.preventDefault()
-    fetchLogin({email, password})
+    await fetchLogin({ email, password })
+    fetchApp()
   }
 
   const formStyle = {
     border: '1px solid #ccc',
     padding: '1rem',
-    margin: '1rem',
-    width: '40rem'
+    fontSize: '20px',
+    margin: '0 auto',
+    width: '40rem',
+    minHeight: '300px',
   }
 
   return (
@@ -46,7 +49,6 @@ const Index: React.FC = () => {
         <br />
         <button>Auth</button>
       </form>
-
       {JSON.stringify(account)}
     </div>
   )

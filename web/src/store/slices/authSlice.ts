@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 import { AppThunk } from '../'
-import { authService } from '../../api'
+import { setTokens } from '../../api/apiClient'
+import authService from '../../api/services/authService'
 
 interface AuthState {
   accessToken: null | string
@@ -38,6 +39,9 @@ const authSlice = createSlice({
     },
     getAuthSuccess(state, action: PayloadAction<AuthLogin>) {
       const { access_token, refresh_token } = action.payload
+      if (access_token) {
+        setTokens(access_token)
+      }
 
       state.accessToken = access_token
       state.refreshToken = refresh_token

@@ -1,15 +1,37 @@
-import { configureStore, Action, ConfigureStoreOptions } from '@reduxjs/toolkit'
+import {
+  // MiddlewareAPI,
+  // isRejectedWithValue,
+  // Middleware,
+  configureStore,
+  Action,
+  ConfigureStoreOptions
+} from '@reduxjs/toolkit'
 import { ThunkAction } from 'redux-thunk'
 import rootReducer, { RootState } from './rootReducer'
 import { setupListeners } from '@reduxjs/toolkit/query/react'
-import { appApi } from './services/appService'
-import { authApi } from './services/authService'
+
+// export const createAxiosAuthMiddleware: Middleware =
+//   (api: MiddlewareAPI) => (next) => (action) => {
+
+// 	const auth = api.getState().auth;
+// 	console.log(auth, 'asd');
+
+// global.axios.defaults.headers.common.Authorization = token ? `Bearer ${token}` : null;
+
+// if (isRejectedWithValue(action)) {
+//   console.warn('We got a rejected action!')
+// }
+
+//     return next(action)
+// }
 
 export const createStore = (options?: ConfigureStoreOptions['preloadedState'] | undefined) =>
   configureStore({
     reducer: rootReducer,
     middleware: (getDefaultMiddleware) =>
-      getDefaultMiddleware().concat(appApi.middleware, authApi.middleware),
+      getDefaultMiddleware().concat(
+        // middleware list
+      ),
     ...options,
   });
 

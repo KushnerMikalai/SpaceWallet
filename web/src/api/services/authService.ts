@@ -1,10 +1,9 @@
-import HttpClient from '../httpClient'
+import { get, post } from '../apiClient'
 
-export class AuthApiProtected extends HttpClient {
-  public constructor() {
-    super()
-  }
-  public login = (body: any) => this.instance.post('/login', body)
-  public register = (body: any) => this.instance.post('/register', body)
-  public checkTokens = () => this.instance.get('/check-tokens')
+const authService = {
+  checkTokens: async () => await get('check-tokens', '', null),
+  login: async (body: any) => await post('login', '', body, null),
+  register: async (body: any) => await post('register', '', body, null),
 }
+
+export default authService

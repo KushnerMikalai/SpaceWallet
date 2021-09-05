@@ -1,9 +1,7 @@
-import HttpClient from '../httpClient'
+import { get } from '../apiClient'
 
-export class AppApiProtected extends HttpClient {
-  public constructor() {
-    super()
-  }
-
-  public appData = () => this.instance.get('/app')
+const appService = {
+  app: async () => await get('app', '', null),
 }
+
+export default appService

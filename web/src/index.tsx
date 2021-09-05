@@ -5,6 +5,7 @@ import { Provider } from 'react-redux'
 import store from './store'
 
 import './assets/styles/normalize.css'
+import './assets/styles/main.css'
 
 ReactDOM.render(
   <React.StrictMode>

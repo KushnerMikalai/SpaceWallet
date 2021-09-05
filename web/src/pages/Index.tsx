@@ -1,15 +1,14 @@
 import React from 'react'
-// import UserList from '../components/UserList'
-// import TodoList from '../components/TodoList'
 import AuthForm from '../components/AuthForm'
+import { useTypedSelector } from '../hooks/useTypedSelector'
 
 const Index: React.FC = () => {
+  const { error } = useTypedSelector(state => state.auth)
+
   return (
     <div>
       <AuthForm />
-      {/* <UserList /> */}
-      {/* <hr /> */}
-      {/* <TodoList /> */}
+      {error}
     </div>
   )
 }

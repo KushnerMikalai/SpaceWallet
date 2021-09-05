@@ -7,9 +7,9 @@ const JWTAuthMiddleware = async (
   next: () => Promise<unknown>,
 ) => {
   try {
-    const token = ctx.cookies.get("access_token");
-
-    if (token) {
+    const authHeader = ctx.request.headers.get("Authorization");
+    if (authHeader) {
+      const token = authHeader.replace(/^bearer/i, "").trim();
       const user = await getJwtPayload(token);
 
       if (user) {
