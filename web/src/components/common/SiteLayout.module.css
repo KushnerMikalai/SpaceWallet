@@ -1,0 +1,27 @@
+.layout {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  min-height: 100vh;
+}
+
+.layout :focus,
+.layout * :focus {
+  outline: 4px solid rgba(0,125,250,0.6);
+}
+
+.footer {
+  margin: 0 auto;
+  max-width: 980px;
+  width: 100%;
+  padding: 32px 14px 20px;
+}
+
+.footerContent {
+  padding-top: 10px;
+  border-top: 1px solid #d2d2d7;
+}
+
+.copy {
+  font-size: 12px;
+  color: #86868b;
+}

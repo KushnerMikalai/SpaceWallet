@@ -1,16 +1,17 @@
-import React from 'react'
-import AuthForm from '../components/AuthForm'
-import { useTypedSelector } from '../hooks/useTypedSelector'
+import React from "react";
+import { useTypedSelector } from "../hooks/useTypedSelector";
+import SiteLayout from "../components/common/SiteLayout";
+import InfoStart from "../components/InfoStart";
 
 const Index: React.FC = () => {
-  const { error } = useTypedSelector(state => state.auth)
+  const { error } = useTypedSelector((state) => state.auth);
 
   return (
-    <div>
-      <AuthForm />
+    <SiteLayout>
+      <InfoStart />
       {error}
-    </div>
-  )
-}
+    </SiteLayout>
+  );
+};
 
-export default Index
+export default Index;

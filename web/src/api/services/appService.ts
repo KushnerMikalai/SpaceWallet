@@ -1,7 +1,7 @@
-import { get } from '../apiClient'
+import { get } from "../apiClient";
 
 const appService = {
-  app: async () => await get('app', '', null),
-}
+  app: async () => await get("app", "", null),
+};
 
-export default appService
+export default appService;

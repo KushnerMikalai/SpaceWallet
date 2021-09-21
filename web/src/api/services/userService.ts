@@ -1,9 +1,9 @@
-import HttpClient from '../httpClient'
+import HttpClient from "../httpClient";
 
 export class UserApiProtected extends HttpClient {
   public constructor() {
-    super()
+    super();
   }
 
-  public getOne = (body: any) => this.instance.get(`/users/${body.id}`)
+  public getOne = (body: any) => this.instance.get(`/users/${body.id}`);
 }

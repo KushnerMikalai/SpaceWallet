@@ -1,7 +1,7 @@
-import { fetchApp } from './slices/appSlice'
-import { fetchUsers } from './slices/userSlice'
-import { setTodoPage, fetchTodos } from './slices/todoSlice'
-import { fetchLogin, fetchCheckTokens } from './slices/authSlice'
+import { fetchApp } from "./slices/appSlice";
+import { fetchUsers } from "./slices/userSlice";
+import { fetchTodos, setTodoPage } from "./slices/todoSlice";
+import { fetchCheckTokens, fetchLogin } from "./slices/authSlice";
 
 const actionCreators = {
   fetchApp,
@@ -11,6 +11,6 @@ const actionCreators = {
 
   fetchLogin,
   fetchCheckTokens,
-}
+};
 
-export default actionCreators
+export default actionCreators;

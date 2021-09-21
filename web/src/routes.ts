@@ -1,26 +1,29 @@
-import Admin from './pages/Admin'
-import Auth from './pages/Auth'
-import Index from './pages/Index'
-import { ADMIN_ROUTE, INDEX_ROUTE, LOGIN_ROUTE, REGISTRATION_ROUTE } from './utils/consts'
+import { lazy } from "react";
+import Admin from "./pages/Admin";
+// import Login from "./pages/Login";
+import Index from "./pages/Index";
+import { ADMIN_ROUTE, INDEX_ROUTE, LOGIN_ROUTE, SIGN_UP } from "./utils/consts";
 
 export const authRoutes = [
   {
     path: ADMIN_ROUTE,
-    Component: Admin
+    Component: Admin,
   },
-]
+];
 
 export const publicRoutes = [
   {
+    name: "home",
     path: INDEX_ROUTE,
-    Component: Index
+    Component: Index,
   },
   {
+    name: "login",
     path: LOGIN_ROUTE,
-    Component: Auth
+    Component: lazy(() => import("./pages/Login")),
   },
-  {
-    path: REGISTRATION_ROUTE,
-    Component: Auth
-  },
-]
+  // {
+  //   path: SIGN_UP,
+  //   Component: Login,
+  // },
+];
