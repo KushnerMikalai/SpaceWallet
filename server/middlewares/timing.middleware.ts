@@ -1,4 +1,4 @@
-import { Context } from "../deps.ts";
+import { Context } from "oak";
 
 const timingMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {
   const start = Date.now();

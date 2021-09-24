@@ -1,4 +1,5 @@
-import { Application, oakCors } from "./deps.ts";
+import { Application } from "oak";
+import { oakCors } from "cors";
 import * as middlewares from "./middlewares/middlewares.ts";
 import { router } from "./routes/routes.ts";
 import { Context } from "./types.ts";

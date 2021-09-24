@@ -3,8 +3,15 @@ import * as categoryRepo from "../repositories/category.repository.ts";
 import { httpErrors } from "../deps.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
-import { CreateUser, LoginCredential, UserInfo, UserRole } from "../types.ts";
-import { mailerObj } from "../helpers/smpt.ts";
+import {
+  CreateUser,
+  LoginCredential,
+  UserInfo,
+  UserRole,
+  AuthCredential,
+  CheckPasswordEmailCredential,
+} from "../types.ts";
+import mailerObj from "../helpers/smpt.ts";
 
 export const registerUser = async (userData: CreateUser) => {
   try {
@@ -99,3 +106,67 @@ export const refreshToken = async (token: string) => {
     throw new httpErrors.Unauthorized("Invalid token object");
   }
 };
+
+export const auth = async (credential: AuthCredential) => {
+  const { email } = credential;
+  const user = await userRepo.getUserByEmail(email);
+  const password = String(Math.floor(100000 + Math.random() * 900000));
+
+  try {
+    await mailerObj({
+      to: email.trim(),
+      body: `
+        <h1>Hello from Clouds!!!!</h1>
+        <p>Password for LogIn: ${password}</p>
+      `,
+    });
+  } catch (err) {
+    if (err?.name !== 'BadResource') {
+      throw new httpErrors.ServiceUnavailable("Service Email Unavailable");
+    }
+  }
+
+  if (user) {
+    await userRepo.updateUser(user.id, {
+      name: user.name,
+      email: user.email,
+      password,
+    });
+  } else {
+    const userData: UserInfo = {
+      roles: [UserRole.USER],
+      name: '',
+      email,
+      password,
+    };
+
+    await userRepo.createUser(userData);
+  }
+
+  return 'ok';
+}
+
+export const checkPasswordEmail = async (credential: CheckPasswordEmailCredential) => {
+  const { password, email } = credential;
+  const user = await userRepo.getUserByEmail(email);
+
+  if (user) {
+    if (user.is_active) {
+      const userPass = user.password;
+      const isValidPass = userPass === password;
+
+      if (isValidPass) {
+        return {
+          "access_token": await jwt.getAuthToken(user),
+          "refresh_token": await jwt.getRefreshToken(user),
+        };
+      } else {
+        throw new httpErrors.Unauthorized("Invalid password");
+      }
+    } else {
+      throw new httpErrors.Unauthorized("Inactive user status");
+    }
+  } else {
+    throw new httpErrors.Unauthorized("Invalid Email");
+  }
+}

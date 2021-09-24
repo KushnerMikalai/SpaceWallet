@@ -1,4 +1,5 @@
-import { Context, uuid } from "../deps.ts";
+import { Context } from "oak";
+import { v4 as uuid } from 'uuid';
 
 const requestIdMiddleware = async (
   ctx: Context,

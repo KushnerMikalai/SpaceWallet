@@ -1,2 +1,2 @@
-import { loadConfig } from "../deps.ts";
+import { config as loadConfig } from "dotenv";
 export const config = loadConfig();

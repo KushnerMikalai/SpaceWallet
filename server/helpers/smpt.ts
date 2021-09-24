@@ -1,4 +1,4 @@
-import { SmtpClient } from "../deps.ts";
+import { SmtpClient } from "smtp";
 import { config } from "./../config/config.ts";
 
 const client = new SmtpClient();
@@ -10,14 +10,14 @@ await client.connectTLS({
   password: config.SMTP_PASSWORD,
 });
 
-let mailerObj = async (data: any) => {
+const mailerObj = async (data: any) => {
   await client.send({
-    from: "Mail from Deno",
+    from: config.SMTP_USERNAME,
     to: data.to,
-    subject: "Deno is Great",
+    subject: "Clouds",
     content: data.body,
   });
   await client.close();
 };
 
-export { mailerObj };
+export default mailerObj;

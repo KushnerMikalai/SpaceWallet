@@ -1,4 +1,5 @@
-import { Context, Router, validasaur } from "../deps.ts";
+import { Context, Router } from "oak";
+import * as validasaur from 'validasaur';
 import { UserRole } from "./../types.ts";
 import { requestValidator, userGuard } from "../middlewares/middlewares.ts";
 
@@ -42,6 +43,25 @@ router
     "/token",
     requestValidator({ bodyRules: authRoutes.refreshTokenSchema }),
     authRoutes.refreshToken,
+  )
+  .post(
+    "/auth",
+    requestValidator({
+      bodyRules: {
+        email: [validasaur.required, validasaur.isEmail],
+      }
+    }),
+    authRoutes.auth,
+  )
+  .post(
+    "/login-code",
+    requestValidator({
+      bodyRules: {
+        email: [validasaur.required, validasaur.isEmail],
+        password: [validasaur.required],
+      }
+    }),
+    authRoutes.checkPasswordEmail,
   );
 
 router

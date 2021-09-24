@@ -21,6 +21,10 @@ interface LoginForm {
   password: string;
 }
 
+interface AuthForm {
+  email: string;
+}
+
 const initialState: AuthState = {
   accessToken: null,
   refreshToken: null,
@@ -47,6 +51,7 @@ const authSlice = createSlice({
       state.refreshToken = refresh_token;
       state.loading = false;
       state.error = null;
+      state.isAuthenticated = true;
     },
     getAuthFailure(state, action: PayloadAction<string>) {
       state.loading = false;
@@ -76,6 +81,19 @@ export const fetchCheckTokens = (): AppThunk =>
       dispatch(getAuthStart());
       const res = await authService.checkTokens();
       dispatch(getAuthSuccess(res));
+    } catch (err) {
+      dispatch(getAuthFailure(err.toString()));
+    }
+  };
+
+export const fetchAuth = (form: AuthForm): AppThunk =>
+  async (dispatch) => {
+    try {
+      dispatch(getAuthStart());
+      const res = await authService.auth(form);
+      console.log(res, 'fetchAuth');
+
+      // dispatch(getAuthSuccess(res));
     } catch (err) {
       dispatch(getAuthFailure(err.toString()));
     }

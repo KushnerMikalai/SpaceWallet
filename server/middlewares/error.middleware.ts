@@ -1,4 +1,4 @@
-import { Context, isHttpError, Status } from "../deps.ts";
+import { Context, isHttpError, Status } from "oak";
 import { config } from "./../config/config.ts";
 
 const errorMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {

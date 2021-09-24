@@ -10,7 +10,7 @@
 ### RUN DENO SERVER
 
 ```bash
-deno run --unstable --watch --allow-read --allow-net app.ts
+deno run --unstable --watch --allow-read --allow-net --import-map=import_map.json  app.ts
 ```
 
 ### DOCKER

@@ -41,7 +41,7 @@ const createUser = async (user: UserInfo) => {
   const { lastInsertId } = await db.query(
     `
             INSERT into users (id, name, email, roles, password, is_active, created_at, updated_at)
-            VALUES (DEFAULT, ? , ? , ?, ?, 0, DEFAULT, DEFAULT);
+            VALUES (DEFAULT, ? , ? , ?, ?, 1, DEFAULT, DEFAULT);
         `,
     [name, email, roles, password],
   );
@@ -51,16 +51,16 @@ const createUser = async (user: UserInfo) => {
 
 const updateUser = async (
   id: number,
-  user: { name: string; email: string },
+  user: { name: string; email: string, password: string },
 ) => {
-  const { name, email } = user;
+  const { name, email, password } = user;
   const result = await db.query(
     `
             UPDATE users
-            SET name = ?, email = ?, updated_at = DEFAULT
+            SET name = ?, email = ?, password = ?, updated_at = DEFAULT
             WHERE id = ?;
         `,
-    [name, email, id],
+    [name, email, password, id],
   );
 
   return result;

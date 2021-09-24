@@ -1,4 +1,4 @@
-import { Context, helpers, httpErrors, Status } from "../deps.ts";
+import { Context, helpers, httpErrors, Status } from "oak";
 import * as userService from "../services/user.service.ts";
 import { UserRole } from "../types.ts";
 import { hasUserRole } from "../helpers/roles.ts";

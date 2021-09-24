@@ -1,5 +1,6 @@
 {
   "deno.lint": true,
   "deno.unstable": true,
-  "deno.enable": true
+  "deno.enable": true,
+  "deno.importMap": "./import_map.json"
 }

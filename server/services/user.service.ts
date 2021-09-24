@@ -1,4 +1,4 @@
-import { httpErrors } from "../deps.ts";
+import { httpErrors } from "oak";
 import * as userRepo from "../repositories/user.repository.ts";
 
 export const getUserById = async (id: number) => {

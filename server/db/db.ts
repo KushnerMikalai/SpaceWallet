@@ -1,4 +1,4 @@
-import { Client } from "../deps.ts";
+import { Client } from "mysql";
 import { config } from "./../config/config.ts";
 
 const port = config.DB_PORT ? parseInt(config.DB_PORT || "") : undefined;

@@ -31,7 +31,7 @@
 
 .content {
   width: 100%;
-  max-width: 390px;
+  max-width: 340px;
   margin-bottom: 40px;
 }
 
@@ -50,16 +50,24 @@
 .send {
   position: absolute;
   background-color: transparent;
-  top: 50%;
+  bottom: 6px;
   right: 6px;
   padding: 2px 4px;
-  transform: translateY(-50%);
   color: #86868b;
   cursor: pointer;
   transition: color 0.3s cubic-bezier(0.25, 0.1, 0.25, 1);
   border-radius: 50%;
   border: transparent;
   line-height: 1;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .send:hover {
@@ -72,4 +80,31 @@
 
 .send:focus {
   outline: 4px solid rgba(0, 125, 250, 0.6);
+}
+
+.sendLoadin {
+  outline: none;
+  animation-name: spin;
+  animation-duration: 1000ms;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+.sendLoadin:focus {
+  outline: 4px solid transparent;
+}
+
+.description {
+  margin-bottom: 6px;
+  color: #86868b;
+  font-size: 14px;
+}
+
+.error {
+  margin: 5px 0 0;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  color: #ff4d4f;
+  font-size: 12px;
 }

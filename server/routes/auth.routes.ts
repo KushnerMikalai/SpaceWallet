@@ -1,4 +1,10 @@
-import { CreateUser, LoginCredential, RefreshToken } from "./../types.ts";
+import {
+  CreateUser,
+  LoginCredential,
+  RefreshToken,
+  AuthCredential,
+  CheckPasswordEmailCredential
+} from "./../types.ts";
 import { Context, validasaur } from "../deps.ts";
 import * as authService from "./../services/auth.service.ts";
 import { config } from "./../config/config.ts";
@@ -122,6 +128,43 @@ const checkTokens = async (ctx: Context) => {
   ctx.response.body = body;
 };
 
+/**
+ * Auth
+ */
+const auth = async (ctx: Context) => {
+  const request = ctx.request;
+  const credential = await request.body().value as unknown as AuthCredential;
+  ctx.response.body = await authService.auth(credential);
+};
+
+/**
+ * Check Password Email
+ */
+ const checkPasswordEmail = async (ctx: Context) => {
+  const request = ctx.request;
+  const credential = await request.body().value as unknown as CheckPasswordEmailCredential;
+  const tokens = await authService.checkPasswordEmail(credential);
+
+  await ctx.cookies.set(
+    "access_token",
+    tokens.access_token,
+    {
+      ...options,
+      expires: getExpires(Number(JWT_ACCESS_TOKEN_EXP)),
+    },
+  );
+  await ctx.cookies.set(
+    "refresh_token",
+    tokens.refresh_token,
+    {
+      ...options,
+      expires: getExpires(Number(JWT_REFRESH_TOKEN_EXP)),
+    },
+  );
+
+  ctx.response.body = tokens;
+};
+
 export {
   checkTokens,
   login,
@@ -130,4 +173,6 @@ export {
   refreshTokenSchema,
   register,
   registrationSchema,
+  auth,
+  checkPasswordEmail,
 };

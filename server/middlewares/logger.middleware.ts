@@ -1,4 +1,4 @@
-import { Context } from "../deps.ts";
+import { Context } from "oak";
 
 const loggerMiddleware = async (ctx: Context, next: () => Promise<unknown>) => {
   await next();

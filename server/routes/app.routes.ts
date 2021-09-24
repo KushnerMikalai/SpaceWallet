@@ -1,4 +1,4 @@
-import { Context } from "../deps.ts";
+import { Context } from "oak";
 import * as userService from "../services/user.service.ts";
 
 const getAppData = async (ctx: Context) => {
