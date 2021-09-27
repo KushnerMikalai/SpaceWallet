@@ -1,8 +1,12 @@
 <script setup lang="ts">
+import SiteLayout from '../components/SiteLayout.vue'
 import HelloWorld from '../components/HelloWorld.vue'
 </script>
 
 <template>
-  <h1>Index</h1>
-  <HelloWorld :msg="'vite'" />
+  <SiteLayout>
+    <div class="container">
+      <HelloWorld :msg="'vite'" />
+    </div>
+  </SiteLayout>
 </template>
