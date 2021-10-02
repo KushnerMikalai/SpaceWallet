@@ -2,6 +2,6 @@ export interface State {
   app: any
 }
 
-export default {
+export const state: State = {
   app: null,
 };

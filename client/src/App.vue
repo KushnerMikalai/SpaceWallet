@@ -1,3 +1,16 @@
+<script setup lang="ts">
+import { useStore } from 'vuex'
+import { onMounted } from 'vue'
+import { key } from './store'
+import { ActionTypes } from './store/actions'
+
+const store = useStore(key)
+
+onMounted(() => {
+  store.dispatch(ActionTypes.FETCH_APP)
+})
+</script>
+
 <template>
   <router-view></router-view>
 </template>
@@ -56,5 +69,6 @@ textarea {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  min-height: 100vh;
 }
 </style>
