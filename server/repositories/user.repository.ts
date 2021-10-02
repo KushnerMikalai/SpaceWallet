@@ -51,7 +51,7 @@ const createUser = async (user: UserInfo) => {
 
 const updateUser = async (
   id: number,
-  user: { name: string; email: string, password: string },
+  user: { name: string; email: string; password: string },
 ) => {
   const { name, email, password } = user;
   const result = await db.query(

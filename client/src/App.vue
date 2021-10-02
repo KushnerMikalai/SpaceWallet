@@ -3,11 +3,21 @@ import { useStore } from 'vuex'
 import { onMounted } from 'vue'
 import { key } from './store'
 import { ActionTypes } from './store/actions'
+import authService from './api/services/authService'
+import { setTokens } from './api/apiClient'
 
 const store = useStore(key)
 
-onMounted(() => {
-  store.dispatch(ActionTypes.FETCH_APP)
+onMounted(async () => {
+  try {
+    const resCheckToken = await authService.checkTokens()
+    if (resCheckToken && resCheckToken.access_token) {
+      setTokens(resCheckToken.access_token)
+    }
+    store.dispatch(ActionTypes.FETCH_APP)
+  } catch (e) {
+    console.log(e, 'Error mount App');
+  }
 })
 </script>
 

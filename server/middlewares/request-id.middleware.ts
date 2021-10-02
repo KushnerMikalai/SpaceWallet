@@ -1,5 +1,5 @@
 import { Context } from "oak";
-import { v4 as uuid } from 'uuid';
+import { v4 as uuid } from "uuid";
 
 const requestIdMiddleware = async (
   ctx: Context,

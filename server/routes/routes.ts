@@ -1,5 +1,5 @@
 import { Context, Router } from "oak";
-import * as validasaur from 'validasaur';
+import * as validasaur from "validasaur";
 import { UserRole } from "./../types.ts";
 import { requestValidator, userGuard } from "../middlewares/middlewares.ts";
 
@@ -49,7 +49,7 @@ router
     requestValidator({
       bodyRules: {
         email: [validasaur.required, validasaur.isEmail],
-      }
+      },
     }),
     authRoutes.auth,
   )
@@ -59,7 +59,7 @@ router
       bodyRules: {
         email: [validasaur.required, validasaur.isEmail],
         password: [validasaur.required],
-      }
+      },
     }),
     authRoutes.checkPasswordEmail,
   );

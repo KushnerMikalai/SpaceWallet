@@ -1,8 +1,9 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
 
-const NotFound = () => import('../views/NotFound.vue');
-const Index = () => import('../views/Index.vue');
-const Login = () => import('../views/Login.vue');
+const NotFound = () => import('../views/NotFound.vue')
+const Index = () => import('../views/Index.vue')
+const Login = () => import('../views/Login.vue')
+const Dashboard = () => import('../views/Dashboard.vue')
 
 const routes = [
   {
@@ -19,6 +20,11 @@ const routes = [
     path: '/login',
     name: 'login',
     component: Login,
+  },
+  {
+    path: '/dashboard',
+    name: 'dashboard',
+    component: Dashboard,
   },
 ]
 

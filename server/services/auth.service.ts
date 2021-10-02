@@ -4,12 +4,12 @@ import { httpErrors } from "../deps.ts";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
 import {
+  AuthCredential,
+  CheckPasswordEmailCredential,
   CreateUser,
   LoginCredential,
   UserInfo,
   UserRole,
-  AuthCredential,
-  CheckPasswordEmailCredential,
 } from "../types.ts";
 import mailerObj from "../helpers/smpt.ts";
 
@@ -121,7 +121,7 @@ export const auth = async (credential: AuthCredential) => {
       `,
     });
   } catch (err) {
-    if (err?.name !== 'BadResource') {
+    if (err?.name !== "BadResource") {
       throw new httpErrors.ServiceUnavailable("Service Email Unavailable");
     }
   }
@@ -135,7 +135,7 @@ export const auth = async (credential: AuthCredential) => {
   } else {
     const userData: UserInfo = {
       roles: [UserRole.USER],
-      name: '',
+      name: "",
       email,
       password,
     };
@@ -143,10 +143,12 @@ export const auth = async (credential: AuthCredential) => {
     await userRepo.createUser(userData);
   }
 
-  return 'ok';
-}
+  return "ok";
+};
 
-export const checkPasswordEmail = async (credential: CheckPasswordEmailCredential) => {
+export const checkPasswordEmail = async (
+  credential: CheckPasswordEmailCredential,
+) => {
   const { password, email } = credential;
   const user = await userRepo.getUserByEmail(email);
 
@@ -169,4 +171,4 @@ export const checkPasswordEmail = async (credential: CheckPasswordEmailCredentia
   } else {
     throw new httpErrors.Unauthorized("Invalid Email");
   }
-}
+};

@@ -1,9 +1,9 @@
 import {
+  AuthCredential,
+  CheckPasswordEmailCredential,
   CreateUser,
   LoginCredential,
   RefreshToken,
-  AuthCredential,
-  CheckPasswordEmailCredential
 } from "./../types.ts";
 import { Context, validasaur } from "../deps.ts";
 import * as authService from "./../services/auth.service.ts";
@@ -140,9 +140,10 @@ const auth = async (ctx: Context) => {
 /**
  * Check Password Email
  */
- const checkPasswordEmail = async (ctx: Context) => {
+const checkPasswordEmail = async (ctx: Context) => {
   const request = ctx.request;
-  const credential = await request.body().value as unknown as CheckPasswordEmailCredential;
+  const credential = await request.body()
+    .value as unknown as CheckPasswordEmailCredential;
   const tokens = await authService.checkPasswordEmail(credential);
 
   await ctx.cookies.set(
@@ -166,6 +167,8 @@ const auth = async (ctx: Context) => {
 };
 
 export {
+  auth,
+  checkPasswordEmail,
   checkTokens,
   login,
   loginSchema,
@@ -173,6 +176,4 @@ export {
   refreshTokenSchema,
   register,
   registrationSchema,
-  auth,
-  checkPasswordEmail,
 };
