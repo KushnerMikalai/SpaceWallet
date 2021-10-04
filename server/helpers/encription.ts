@@ -1,4 +1,4 @@
-import { bcrypt } from "../deps.ts";
+import * as bcrypt from "bcrypt";
 
 const encript = async (password: string) => {
   return await bcrypt.hash(password);

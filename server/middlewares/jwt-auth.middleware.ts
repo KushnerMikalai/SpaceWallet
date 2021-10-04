@@ -1,4 +1,4 @@
-import { Context } from "../deps.ts";
+import { Context } from "oak";
 import { AuthUser } from "./../types.ts";
 import { getJwtPayload } from "../helpers/jwt.ts";
 

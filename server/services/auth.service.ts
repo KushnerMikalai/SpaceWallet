@@ -1,6 +1,6 @@
 import * as userRepo from "./../repositories/user.repository.ts";
 import * as categoryRepo from "../repositories/category.repository.ts";
-import { httpErrors } from "../deps.ts";
+import { httpErrors } from "oak";
 import * as encription from "../helpers/encription.ts";
 import * as jwt from "../helpers/jwt.ts";
 import {

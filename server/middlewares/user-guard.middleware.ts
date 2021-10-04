@@ -1,4 +1,4 @@
-import { Context, httpErrors } from "../deps.ts";
+import { Context, httpErrors } from "oak";
 import { UserRole } from "../types.ts";
 import { hasUserRole } from "../helpers/roles.ts";
 

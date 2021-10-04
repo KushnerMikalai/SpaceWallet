@@ -5,7 +5,8 @@ import {
   LoginCredential,
   RefreshToken,
 } from "./../types.ts";
-import { Context, validasaur } from "../deps.ts";
+import { Context } from "oak";
+import * as validasaur from "validasaur";
 import * as authService from "./../services/auth.service.ts";
 import { config } from "./../config/config.ts";
 import { Tokens } from "../types/auth.types.ts";
@@ -55,14 +56,10 @@ const login = async (ctx: Context) => {
   const credential = await request.body().value as unknown as LoginCredential;
   const tokens = await authService.loginUser(credential);
 
-  await ctx.cookies.set(
-    "access_token",
-    tokens.access_token,
-    {
-      ...options,
-      expires: getExpires(Number(JWT_ACCESS_TOKEN_EXP)),
-    },
-  );
+  await ctx.cookies.set("access_token", tokens.access_token, {
+    ...options,
+    expires: getExpires(Number(JWT_ACCESS_TOKEN_EXP)),
+  });
   await ctx.cookies.set(
     "refresh_token",
     tokens.refresh_token,
@@ -92,8 +89,8 @@ const refreshToken = async (ctx: Context) => {
  * AUTH CHECK TOKENS
  */
 const checkTokens = async (ctx: Context) => {
-  const accessToken = ctx.cookies.get("access_token");
-  const refreshToken = ctx.cookies.get("refresh_token");
+  const accessToken = await ctx.cookies.get("access_token");
+  const refreshToken = await ctx.cookies.get("refresh_token");
   const body: Tokens = {
     "access_token": refreshToken || null,
     "refresh_token": refreshToken || null,

@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { useStore } from 'vuex'
-import { onMounted } from 'vue'
+import { onMounted, onBeforeMount } from 'vue'
 import { key } from './store'
 import { ActionTypes } from './store/actions'
 import authService from './api/services/authService'
 import { setTokens } from './api/apiClient'
-
+import { MutationTypes } from './store/mutations'
 const store = useStore(key)
+
+onBeforeMount(() => {
+  store.commit(MutationTypes.SET_LOADING_PAGE, true)
+})
 
 onMounted(async () => {
   try {
@@ -14,7 +18,10 @@ onMounted(async () => {
     if (resCheckToken && resCheckToken.access_token) {
       setTokens(resCheckToken.access_token)
     }
-    store.dispatch(ActionTypes.FETCH_APP)
+    await store.dispatch(ActionTypes.FETCH_APP)
+
+    // TODO check user and move to dashboard
+    store.commit(MutationTypes.SET_LOADING_PAGE, false)
   } catch (e) {
     console.log(e, 'Error mount App');
   }

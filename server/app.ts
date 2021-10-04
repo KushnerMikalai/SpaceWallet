@@ -2,10 +2,9 @@ import { Application } from "oak";
 import { oakCors } from "cors";
 import * as middlewares from "./middlewares/middlewares.ts";
 import { router } from "./routes/routes.ts";
-import { Context } from "./types.ts";
 
 const port = 8000;
-const app = new Application<Context>();
+const app = new Application();
 
 app.use(oakCors());
 app.use(middlewares.loggerMiddleware);
