@@ -20,7 +20,6 @@ const eventListeners = computed(() => ({
     emit('update:modelValue', target.value)
   },
   blur: (e: any) => emit('blur', e),
-  // change: this.onChange,
   // click: this.onClick,
   // focus: this.onFocus,
   // keyup: this.onKeyup,

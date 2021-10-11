@@ -5,13 +5,12 @@
     * MySQL
     * Adminer
 * Client
-    * react (TypeScript)
-    * redux
+
 
 ## Environment:
 * Deno - 1.13.1
-* Node - 14.15.4
-* NPM - 7.17.0
+* Node - 16.8.0
+* NPM - 7.21.0
 
 
 ## Server Deno

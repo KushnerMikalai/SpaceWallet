@@ -24,7 +24,7 @@ export const actions: ActionTree<State, State> & Actions = {
   async [ActionTypes.FETCH_APP]({ commit }) {
     try {
       const res = await appService.app()
-      commit(MutationTypes.SET_APP, res)
+      await commit(MutationTypes.SET_APP, res)
     } catch (err) {
       console.log(err, 'Error get App'); // TODO
     }

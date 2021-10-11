@@ -32,3 +32,14 @@ export const router = createRouter({
   history: createWebHashHistory(),
   routes,
 })
+
+// router.beforeEach((to, from, next) => {
+
+//   console.log(store?.getters?.isAuth, 1);
+
+//   // access store via `router.app.$store` here.
+//   // if (router.app.$store.getters('user')) next();
+//   // else next({ name: 'login' });
+
+//   next()
+// })

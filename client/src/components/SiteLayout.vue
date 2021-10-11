@@ -1,10 +1,6 @@
 <script setup lang="ts">
-import { onMounted, computed } from 'vue'
+import { computed } from 'vue'
 import Logo from './Logo.vue'
-
-onMounted(() => {
-  console.log('layout mounted');
-})
 
 const year = computed(() => new Date().getFullYear());
 </script>

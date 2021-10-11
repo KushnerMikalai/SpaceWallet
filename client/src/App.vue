@@ -1,12 +1,16 @@
 <script setup lang="ts">
-import { useStore } from 'vuex'
-import { onMounted, onBeforeMount } from 'vue'
+import { useStore, } from 'vuex'
+import { useRouter } from 'vue-router'
+import { onMounted, onBeforeMount, computed } from 'vue'
 import { key } from './store'
 import { ActionTypes } from './store/actions'
 import authService from './api/services/authService'
 import { setTokens } from './api/apiClient'
 import { MutationTypes } from './store/mutations'
 const store = useStore(key)
+const router = useRouter()
+const isAuth = computed(() => store.getters.isAuth)
+const loadingPage = computed(() => store.state.loadingPage)
 
 onBeforeMount(() => {
   store.commit(MutationTypes.SET_LOADING_PAGE, true)
@@ -20,7 +24,9 @@ onMounted(async () => {
     }
     await store.dispatch(ActionTypes.FETCH_APP)
 
-    // TODO check user and move to dashboard
+    if (isAuth.value) {
+      router.push({ name: 'dashboard' })
+    }
     store.commit(MutationTypes.SET_LOADING_PAGE, false)
   } catch (e) {
     console.log(e, 'Error mount App');
@@ -29,7 +35,8 @@ onMounted(async () => {
 </script>
 
 <template>
-  <router-view></router-view>
+  <div v-if="loadingPage">Loading page...</div>
+  <router-view v-else></router-view>
 </template>
 
 <style>
@@ -40,6 +47,12 @@ html {
 
 body {
   margin: 0;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
 }
 
 main {
