@@ -23,13 +23,13 @@ DROP TABLE IF EXISTS `category`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
-  `categoryId` smallint unsigned NOT NULL AUTO_INCREMENT,
+  `id` smallint unsigned NOT NULL AUTO_INCREMENT,
   `userId` int NOT NULL,
   `name` varchar(100) NOT NULL,
   `image` varchar(150) DEFAULT NULL,
   `createdAt` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updatedAt` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`categoryId`),
+  PRIMARY KEY (`id`),
   KEY `fk_userId` (`userId`),
   CONSTRAINT `fk_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;

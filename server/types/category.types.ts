@@ -3,3 +3,10 @@ export type CreateCategory = {
   image: string;
   userId: number;
 };
+
+export type Category = {
+  id: string;
+  name: string;
+  image: string;
+  userId: string;
+}

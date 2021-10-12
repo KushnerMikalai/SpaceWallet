@@ -13,6 +13,16 @@ import {
 } from "../types.ts";
 import mailerObj from "../helpers/smpt.ts";
 
+const defaultCategoryList = [
+  "car",
+  "foodstuff",
+  "health",
+  "rest",
+  "gas",
+  "training",
+  "home",
+];
+
 export const registerUser = async (userData: CreateUser) => {
   try {
     const { password } = userData;
@@ -29,16 +39,6 @@ export const registerUser = async (userData: CreateUser) => {
       to: newUser.email,
       body: `<h1>Hello from Deno!</h1>`, // TODO: generate validate token sent to email new user
     });
-
-    const defaultCategoryList = [
-      "car",
-      "foodstuff",
-      "health",
-      "rest",
-      "gas",
-      "training",
-      "home",
-    ];
 
     defaultCategoryList.forEach((key) => {
       categoryRepo.createCategory({ name: key, image: "", userId: newUser.id });
@@ -116,8 +116,8 @@ export const auth = async (credential: AuthCredential) => {
     await mailerObj({
       to: email.trim(),
       body: `
-        <h1>Hello from Clouds!!!!</h1>
-        <p>Password for LogIn: ${password}</p>
+        <h1>Hello bro!!!</h1>
+        <p>Password for Log In: <b>${password}</b></p>
       `,
     });
   } catch (err) {
@@ -139,8 +139,11 @@ export const auth = async (credential: AuthCredential) => {
       email,
       password,
     };
+    const newUser = await userRepo.createUser(userData);
 
-    await userRepo.createUser(userData);
+    defaultCategoryList.forEach((key) => {
+      categoryRepo.createCategory({ name: key, image: "", userId: newUser.id });
+    });
   }
 
   return "ok";
