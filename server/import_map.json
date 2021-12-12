@@ -8,6 +8,7 @@
     "uuid": "https://deno.land/std@0.99.0/uuid/mod.ts",
     "smtp": "https://deno.land/x/smtp@v0.7.0/mod.ts",
     "djwt": "https://deno.land/x/djwt@v2.3/mod.ts",
-    "bcrypt": "https://deno.land/x/bcrypt@v0.2.4/mod.ts"
+    "bcrypt": "https://deno.land/x/bcrypt@v0.2.4/mod.ts",
+    "fmt": "https://deno.land/std@0.111.0/fmt/"
   }
 }

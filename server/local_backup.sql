@@ -1,27 +1,13 @@
--- MySQL dump 10.13  Distrib 8.0.26, for Linux (x86_64)
---
--- Host: localhost    Database: deno_api_db
--- ------------------------------------------------------
--- Server version	8.0.26
+-- Adminer 4.8.1 MySQL 8.0.26 dump
 
-/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
-/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
-/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
-/*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
-/*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
-/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
-/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
-/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+SET NAMES utf8;
+SET time_zone = '+00:00';
+SET foreign_key_checks = 0;
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
 
---
--- Table structure for table `category`
---
+SET NAMES utf8mb4;
 
 DROP TABLE IF EXISTS `category`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `category` (
   `id` smallint unsigned NOT NULL AUTO_INCREMENT,
   `userId` int NOT NULL,
@@ -32,25 +18,18 @@ CREATE TABLE `category` (
   PRIMARY KEY (`id`),
   KEY `fk_userId` (`userId`),
   CONSTRAINT `fk_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `category`
---
-
-LOCK TABLES `category` WRITE;
-/*!40000 ALTER TABLE `category` DISABLE KEYS */;
-/*!40000 ALTER TABLE `category` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `expense`
---
+INSERT INTO `category` (`id`, `userId`, `name`, `image`, `createdAt`, `updatedAt`) VALUES
+(36,	25,	'car',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55'),
+(37,	25,	'foodstuff',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55'),
+(38,	25,	'health',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55'),
+(39,	25,	'rest',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55'),
+(40,	25,	'gas',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55'),
+(41,	25,	'training',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55'),
+(42,	25,	'home',	'',	'2021-10-13 17:55:55',	'2021-10-13 17:55:55');
 
 DROP TABLE IF EXISTS `expense`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `expense` (
   `id` smallint unsigned NOT NULL AUTO_INCREMENT,
   `userId` int NOT NULL,
@@ -65,24 +44,9 @@ CREATE TABLE `expense` (
   CONSTRAINT `expense_categoryId` FOREIGN KEY (`categoryId`) REFERENCES `category` (`id`),
   CONSTRAINT `expense_userId` FOREIGN KEY (`userId`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
 
---
--- Dumping data for table `expense`
---
-
-LOCK TABLES `expense` WRITE;
-/*!40000 ALTER TABLE `expense` DISABLE KEYS */;
-/*!40000 ALTER TABLE `expense` ENABLE KEYS */;
-UNLOCK TABLES;
-
---
--- Table structure for table `users`
---
 
 DROP TABLE IF EXISTS `users`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` int NOT NULL AUTO_INCREMENT,
   `name` varchar(100) NOT NULL,
@@ -94,26 +58,14 @@ CREATE TABLE `users` (
   `updated_at` datetime DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   UNIQUE KEY `email_unique` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
-/*!40101 SET character_set_client = @saved_cs_client */;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
---
--- Dumping data for table `users`
---
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `roles`, `is_active`, `created_at`, `updated_at`) VALUES
+(1,	'admin',	'admin@admin.io',	'$2a$10$G52DTJ6bgUhLPfJzdQDzi.XUYDzD8aViNzQn6qnmHGQzzuYwL6KTS',	'Admin',	1,	'2021-07-14 18:01:25',	'2021-07-14 18:01:25'),
+(2,	'Ida Watson',	'ida.watson@example.com',	'1',	'User',	NULL,	'2021-07-03 19:14:43',	'2021-07-03 19:14:43'),
+(3,	'Marshall Barrett',	'marshall.barrett@example.com',	'1',	'User',	NULL,	'2021-07-03 19:14:43',	'2021-07-03 19:14:43'),
+(4,	'John Doe',	'john@example.com',	'1',	'User',	NULL,	'2021-07-03 19:14:43',	'2021-07-03 19:14:43'),
+(5,	'Asad Rahman',	'asad.dk.bd@gmail.com',	'1',	'User',	NULL,	'2021-07-03 19:14:43',	'2021-07-03 19:14:43'),
+(25,	'',	'nickminskwdf@gmail.com',	'358364',	'User',	1,	'2021-10-13 17:55:55',	'2021-10-13 18:00:26');
 
-LOCK TABLES `users` WRITE;
-/*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'admin','admin@admin.io','$2a$10$G52DTJ6bgUhLPfJzdQDzi.XUYDzD8aViNzQn6qnmHGQzzuYwL6KTS','Admin',1,'2021-07-14 18:01:25','2021-07-14 18:01:25'),(2,'Ida Watson','ida.watson@example.com','1','User',NULL,'2021-07-03 19:14:43','2021-07-03 19:14:43'),(3,'Marshall Barrett','marshall.barrett@example.com','1','User',NULL,'2021-07-03 19:14:43','2021-07-03 19:14:43'),(4,'John Doe','john@example.com','1','User',NULL,'2021-07-03 19:14:43','2021-07-03 19:14:43'),(5,'Asad Rahman','asad.dk.bd@gmail.com','1','User',NULL,'2021-07-03 19:14:43','2021-07-03 19:14:43');
-/*!40000 ALTER TABLE `users` ENABLE KEYS */;
-UNLOCK TABLES;
-/*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
-
-/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
-/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
-/*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
-/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
-/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
-/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
-/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
-
--- Dump completed on 2021-10-12 20:43:26
+-- 2021-10-21 19:05:29

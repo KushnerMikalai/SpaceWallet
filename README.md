@@ -8,7 +8,7 @@
 
 
 ## Environment:
-* Deno - 1.13.1
+* Deno - 1.14.3
 * Node - 16.8.0
 * NPM - 7.21.0
 
@@ -24,7 +24,7 @@
 
 ### RUN DENO SERVER
 ```bash
-deno run --unstable --watch --allow-read --allow-net app.ts
+deno run --unstable --watch --allow-read --allow-net --import-map=import_map.json  app.ts
 ```
 
 ### DOCKER
