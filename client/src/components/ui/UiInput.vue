@@ -1,8 +1,7 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue'
 
 const attrs = useAttrs()
-
 const emit = defineEmits(['update:modelValue', 'blur'])
 
 defineProps({

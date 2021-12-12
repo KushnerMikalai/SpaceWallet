@@ -1,6 +1,3 @@
-<script setup lang="ts">
-</script>
-
 <template>
   <div class="layout">
     <main>
@@ -8,6 +5,9 @@
     </main>
   </div>
 </template>
+
+<script setup lang="ts">
+</script>
 
 <style scoped>
 .layout {

@@ -1,9 +1,10 @@
 import { createRouter, createWebHashHistory } from 'vue-router'
+import { useRootStore } from '../stores/root'
 
-const NotFound = () => import('../views/NotFound.vue')
-const Index = () => import('../views/Index.vue')
-const Login = () => import('../views/Login.vue')
-const Dashboard = () => import('../views/Dashboard.vue')
+const NotFound = () => import('../pages/NotFound.vue')
+const Index = () => import('../pages/Index.vue')
+const Login = () => import('../pages/Login.vue')
+const Dashboard = () => import('../pages/Dashboard.vue')
 
 const routes = [
   {
@@ -33,13 +34,8 @@ export const router = createRouter({
   routes,
 })
 
-// router.beforeEach((to, from, next) => {
+router.beforeEach((to) => {
+  const store = useRootStore()
 
-//   console.log(store?.getters?.isAuth, 1);
-
-//   // access store via `router.app.$store` here.
-//   // if (router.app.$store.getters('user')) next();
-//   // else next({ name: 'login' });
-
-//   next()
-// })
+  if (to.meta.requiresAuth && !store.isLoggedIn) return '/login'
+})

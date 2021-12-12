@@ -1,9 +1,9 @@
 <script setup lang="ts">
-import { computed, useAttrs } from "vue";
+import { computed, useAttrs } from 'vue'
 
 const attrs = useAttrs()
 
-const computedInputAttributes = computed(() => ({
+const computedInputAttributes: any = computed(() => ({
   ...attrs,
 }))
 </script>
