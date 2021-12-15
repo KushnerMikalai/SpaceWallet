@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { useCounterStore } from '../stores/counter'
+import UiButton from './ui/UiButton.vue'
+import UiInput from './ui/UiInput.vue'
 const counter = useCounterStore()
-
 
 defineProps<{ msg: string }>()
 
@@ -11,16 +12,6 @@ const count = ref(0)
 
 <template>
   <h1>{{ msg }}</h1>
-
-  <p>
-    Recommended IDE setup:
-    <a href="https://code.visualstudio.com/" target="_blank">VSCode</a>
-    +
-    <a href="https://github.com/johnsoncodehk/volar" target="_blank">Volar</a>
-  </p>
-
-  <p>See <code>README.md</code> for more information.</p>
-
   <p>
     <a href="https://vitejs.dev/guide/features.html" target="_blank">
       Vite Docs
@@ -29,16 +20,17 @@ const count = ref(0)
     <a href="https://v3.vuejs.org/" target="_blank">Vue 3 Docs</a>
   </p>
 
-  <button type="button" @click="counter.increment()">count is: {{ counter.count }}</button>
-  <button type="button" @click="counter.$reset">reset</button>
-  <button type="button" @click="counter.$patch({ count: counter.count + 123 })">patch (+ 123)</button>
-  <button type="button" @click="counter.incrementAsync()">async increment</button>
-
-
-  <p>
-    Edit
-    <code>components/HelloWorld.vue</code> to test hot module replacement.
-  </p>
+  <UiButton @click="counter.increment()">count is: {{ counter.count }}</UiButton>
+  <UiButton @click="counter.$reset">reset</UiButton>
+  <UiButton @click="counter.$patch({ count: counter.count + 123 })">patch (+ 123)</UiButton>
+  <UiButton
+    :type-style="'primary'"
+    @click="counter.incrementAsync()"
+  >
+    async increment
+  </UiButton>
+  {{count}}
+  <UiInput v-model="count"/>
 </template>
 
 <style scoped>
