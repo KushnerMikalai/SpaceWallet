@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useCounterStore } from '../stores/counter'
 import UiButton from './ui/UiButton.vue'
 import UiInput from './ui/UiInput.vue'
+import UiSpinner from './ui/UiSpinner.vue'
 const counter = useCounterStore()
 
 defineProps<{ msg: string }>()
@@ -21,7 +22,7 @@ const count = ref(0)
   </p>
 
   <UiButton @click="counter.increment()">count is: {{ counter.count }}</UiButton>
-  <UiButton @click="counter.$reset">reset</UiButton>
+  <UiButton @click="counter.$reset()">reset</UiButton>
   <UiButton @click="counter.$patch({ count: counter.count + 123 })">patch (+ 123)</UiButton>
   <UiButton
     :type-style="'primary'"
@@ -31,6 +32,9 @@ const count = ref(0)
   </UiButton>
   {{count}}
   <UiInput v-model="count"/>
+  <div>
+    <UiSpinner :size="'lg'"/>
+  </div>
 </template>
 
 <style scoped>

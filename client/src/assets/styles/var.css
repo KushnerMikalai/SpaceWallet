@@ -58,6 +58,13 @@
   --global--LineHeight--sm: 1.3;
   --global--LineHeight--md: 1.5;
 
+  --global--icon--Color--light: #6a6e73;
+  --global--icon--Color--dark: #151515;
+  --global--icon--FontSize--sm: 0.625rem;
+  --global--icon--FontSize--md: 1.125rem;
+  --global--icon--FontSize--lg: 1.5rem;
+  --global--icon--FontSize--xl: 3.375rem;
+
   --global--FontFamily--sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
 
   --global--spacer--xs: 0.25rem;
