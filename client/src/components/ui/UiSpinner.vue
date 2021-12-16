@@ -8,7 +8,7 @@ withDefaults(defineProps<Props>(), {})
 
 <template>
   <span
-    class="ui-spinner pf-m-md"
+    class="ui-spinner"
     role="progressbar"
     aria-label="Loading..."
     :class="

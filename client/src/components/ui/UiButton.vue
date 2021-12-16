@@ -30,7 +30,7 @@ withDefaults(defineProps<Props>(), {
   </button>
 </template>
 
-<style lang="scss">
+<style lang="scss" scoped>
 .ui-button {
   --button--after--BorderWidth: var(--global--BorderWidth--sm);
   --button--hover--after--BorderWidth: var(--global--BorderWidth--md);

@@ -6,3 +6,9 @@ declare module '*.vue' {
   const component: DefineComponent<{}, {}, any>
   export default component
 }
+
+declare module 'vue3-popper' {
+  import { Component } from 'vue'
+  const file: Component
+  export default file
+}
