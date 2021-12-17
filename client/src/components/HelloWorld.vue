@@ -62,7 +62,15 @@ const count = ref(0)
   </div>
 
   <div>
-    <UiTooltip />
+
+    <UiTooltip :content="'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, amet.'">
+      <UiButton
+        :type-style="'primary'"
+        @click="counter.incrementAsync()"
+      >
+        async increment
+      </UiButton>
+    </UiTooltip>
   </div>
 </template>
 

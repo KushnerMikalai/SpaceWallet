@@ -1,27 +1,38 @@
 <script setup lang="ts">
 import Popper from 'vue3-popper'
+import { useSlots, computed } from 'vue'
+
+const slots = useSlots()
 
 interface Props {
   arrow?: boolean
   hover?: boolean
+  content?: string
+  placement?: string
 }
 
-withDefaults(defineProps<Props>(), {
+const props = withDefaults(defineProps<Props>(), {
   arrow: true,
   hover: true,
+  placement: 'top',
 })
+
+const isShowContent = computed(() => slots.content || props.content)
 
 </script>
 
 <template>
   <Popper
+    v-if="isShowContent"
     :class="'ui-tooltip'"
     :arrow="arrow"
     :hover="hover"
+    :placement="placement"
   >
-    <button>Trigger element</button>
+    <slot></slot>
     <template #content>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam id feugiat augue, nec fringilla turpis.
+      <slot v-if="slots.content" name="content"></slot>
+      <div v-else v-html="content"></div>
     </template>
   </Popper>
 </template>
@@ -43,6 +54,8 @@ withDefaults(defineProps<Props>(), {
   --popper-theme-text-color: var(--tooltip__content--Color);
   --popper-theme-border-width: 1px;
   --popper-theme-border-radius: 0;
+  --popper-theme-border-style: 'solid';
+  --popper-theme-border-color: var(--tooltip__content--BackgroundColor);
   --popper-theme-padding: var(--tooltip__content--PaddingTop) var(--tooltip__content--PaddingRight) var(--tooltip__content--PaddingBottom) var(--tooltip__content--PaddingLeft);
   --popper-theme-box-shadow: var(--tooltip--BoxShadow)
 }
