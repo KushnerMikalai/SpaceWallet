@@ -3,6 +3,7 @@ import { ref } from 'vue'
 import { useCounterStore } from '../stores/counter'
 import UiButton from './ui/UiButton.vue'
 import UiInput from './ui/UiInput.vue'
+import UiSelect from './ui/UiSelect.vue'
 import UiSpinner from './ui/UiSpinner.vue'
 import UiTooltip from './ui/UiTooltip.vue'
 
@@ -52,24 +53,42 @@ const count = ref(0)
     async increment
   </UiButton>
 
-  <div>
+  <div style="width: 300px">
+    <UiSelect
+      component="select"
+      :options="[
+        {
+          value: 1,
+          content: 'option_1',
+        },
+        {
+          value: 2,
+          content: 'option_2',
+        }
+      ]"
+    />
+  </div>
+  <div style="width: 300px">
+    <UiInput
+      v-model="count"
+      :value="count"
+    />
     {{count}}
-    <UiInput v-model="count"/>
   </div>
 
-  <div>
+
+  <!-- <div>
     <UiSpinner :size="'lg'"/>
-  </div>
+  </div> -->
 
-  <div>
-
-    <UiTooltip :content="'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Delectus, amet.'">
-      <UiButton
-        :type-style="'primary'"
-        @click="counter.incrementAsync()"
-      >
-        async increment
-      </UiButton>
+  <div style="overflow: hidden; padding: 4rem;">
+    <UiTooltip
+      :content="'Lorem ipsum dolor sit amet, consectetur adipisicing elit. Vero, est.'"
+      :hover="false"
+      :arrow="true"
+      :placement="'bottom-start'"
+    >
+      i
     </UiTooltip>
   </div>
 </template>
